@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { BarChart3, Bot, Brain, LayoutDashboard, Leaf, LineChart, Microscope, Zap } from 'lucide-react'
+import { BarChart3, Brain, Headphones, LayoutDashboard, Leaf, LineChart, Microscope, Zap } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import useTranslate from '../../hooks/useTranslate'
 
@@ -23,7 +23,7 @@ const NAV_GROUPS = [
     label: 'AI',
     items: [
       { label: 'Model Insights',     to: '/model-performance',   icon: Microscope },
-      { label: 'AI Assistant',       to: '/ai-assistant',        icon: Bot },
+      { label: 'Voice Assistant',    to: '/voice-assistant',     icon: Headphones },
     ],
   },
 ]

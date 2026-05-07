@@ -21,7 +21,7 @@ async def lifespan(app: FastAPI):
     log.info("Starting up — loading ML artifacts")
     predictor.load_artifacts()
     try:
-        image_predictor.load_cnn()
+        image_predictor.load_models()
     except Exception as exc:
         log.warning("CNN model failed to load — /predict-image unavailable", extra={"error": str(exc)})
     log.info("Startup complete")
@@ -87,7 +87,7 @@ def predict(
     payload: PredictRequest,
     model_type: Optional[ModelType] = Query(
         default="best",
-        description="Model to use: random_forest | gradient_boosting | ann | best",
+        description="Model to use: random_forest | ann | dnn | best",
     ),
 ):
     try:
@@ -147,7 +147,7 @@ async def smart_decision(
     ),
     model_type: Optional[ModelType] = Query(
         default="best",
-        description="ML model to use: random_forest | gradient_boosting | ann | best",
+        description="ML model to use: random_forest | ann | dnn | best",
     ),
 ):
     if file.content_type not in ALLOWED_CONTENT_TYPES:

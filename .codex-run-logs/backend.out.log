@@ -1,0 +1,2 @@
+{"asctime": "2026-05-06 15:37:38,431", "levelname": "INFO", "name": "main", "message": "Starting up \u2014 loading ML artifacts"}
+{"asctime": "2026-05-06 15:37:38,432", "levelname": "INFO", "name": "predict", "message": "Loading scaler", "path": "d:\\sem6\\MDM\\project\\backend\\models\\scaler.pkl"}

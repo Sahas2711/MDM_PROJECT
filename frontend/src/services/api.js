@@ -1,4 +1,5 @@
 const BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8000'
+const VOICE_BASE_URL = import.meta.env.VITE_VOICE_API_URL ?? 'http://localhost:8001'
 
 /**
  * POST /predict
@@ -84,6 +85,64 @@ export async function fetchPredictionWithModel(min_price, max_price, model_type)
   if (!response.ok) {
     const error = await response.json().catch(() => ({}))
     throw new Error(error.detail || `Request failed with status ${response.status}`)
+  }
+
+  return response.json()
+}
+
+export async function fetchVoiceHealth() {
+  const response = await fetch(`${VOICE_BASE_URL}/health`)
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}))
+    throw new Error(error.detail || `Voice service failed with status ${response.status}`)
+  }
+
+  return response.json()
+}
+
+export async function fetchVoiceChat(audioFile) {
+  const form = new FormData()
+  form.append('file', audioFile)
+
+  const response = await fetch(`${VOICE_BASE_URL}/voice-chat`, {
+    method: 'POST',
+    body: form,
+  })
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}))
+    throw new Error(error.detail || `Voice chat failed with status ${response.status}`)
+  }
+
+  return response.json()
+}
+
+export async function fetchVoiceReply(text) {
+  const response = await fetch(`${VOICE_BASE_URL}/generate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text }),
+  })
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}))
+    throw new Error(error.detail || `Voice reply failed with status ${response.status}`)
+  }
+
+  return response.json()
+}
+
+export async function fetchVoiceSynthesis(text) {
+  const response = await fetch(`${VOICE_BASE_URL}/synthesize`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text }),
+  })
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}))
+    throw new Error(error.detail || `Speech synthesis failed with status ${response.status}`)
   }
 
   return response.json()

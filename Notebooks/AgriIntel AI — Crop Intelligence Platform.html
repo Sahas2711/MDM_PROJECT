@@ -1,0 +1,2131 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)http://localhost:5173/smart-decision -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="http://localhost:5173/@vite/client"></script>
+
+    
+    <link rel="icon" type="image/svg+xml" href="http://localhost:5173/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriIntel AI — Crop Intelligence Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./AgriIntel AI — Crop Intelligence Platform_files/css2" rel="stylesheet">
+  <style type="text/css" data-vite-dev-id="D:/sem6/MDM/project/frontend/src/index.css">*, ::before, ::after {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop {
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}/*
+! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
+*//*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4; /* 3 */
+  font-family: Inter, Poppins, system-ui, sans-serif; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: JetBrains Mono, ui-monospace, monospace; /* 1 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+.fixed {
+  position: fixed;
+}
+.absolute {
+  position: absolute;
+}
+.relative {
+  position: relative;
+}
+.inset-x-0 {
+  left: 0px;
+  right: 0px;
+}
+.-right-1 {
+  right: -0.25rem;
+}
+.-top-1 {
+  top: -0.25rem;
+}
+.bottom-0 {
+  bottom: 0px;
+}
+.top-0 {
+  top: 0px;
+}
+.z-10 {
+  z-index: 10;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+.ml-1 {
+  margin-left: 0.25rem;
+}
+.ml-2 {
+  margin-left: 0.5rem;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.mt-0\.5 {
+  margin-top: 0.125rem;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-3 {
+  margin-top: 0.75rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mt-auto {
+  margin-top: auto;
+}
+.block {
+  display: block;
+}
+.flex {
+  display: flex;
+}
+.inline-flex {
+  display: inline-flex;
+}
+.grid {
+  display: grid;
+}
+.hidden {
+  display: none;
+}
+.h-1\.5 {
+  height: 0.375rem;
+}
+.h-10 {
+  height: 2.5rem;
+}
+.h-11 {
+  height: 2.75rem;
+}
+.h-12 {
+  height: 3rem;
+}
+.h-2 {
+  height: 0.5rem;
+}
+.h-2\.5 {
+  height: 0.625rem;
+}
+.h-3 {
+  height: 0.75rem;
+}
+.h-4 {
+  height: 1rem;
+}
+.h-5 {
+  height: 1.25rem;
+}
+.h-52 {
+  height: 13rem;
+}
+.h-6 {
+  height: 1.5rem;
+}
+.h-64 {
+  height: 16rem;
+}
+.h-7 {
+  height: 1.75rem;
+}
+.h-80 {
+  height: 20rem;
+}
+.h-9 {
+  height: 2.25rem;
+}
+.h-\[390px\] {
+  height: 390px;
+}
+.h-full {
+  height: 100%;
+}
+.min-h-\[100px\] {
+  min-height: 100px;
+}
+.min-h-\[120px\] {
+  min-height: 120px;
+}
+.min-h-\[170px\] {
+  min-height: 170px;
+}
+.min-h-\[180px\] {
+  min-height: 180px;
+}
+.min-h-\[200px\] {
+  min-height: 200px;
+}
+.min-h-\[260px\] {
+  min-height: 260px;
+}
+.min-h-\[280px\] {
+  min-height: 280px;
+}
+.min-h-full {
+  min-height: 100%;
+}
+.w-10 {
+  width: 2.5rem;
+}
+.w-11 {
+  width: 2.75rem;
+}
+.w-2\.5 {
+  width: 0.625rem;
+}
+.w-3 {
+  width: 0.75rem;
+}
+.w-4 {
+  width: 1rem;
+}
+.w-5 {
+  width: 1.25rem;
+}
+.w-9 {
+  width: 2.25rem;
+}
+.w-full {
+  width: 100%;
+}
+.min-w-\[220px\] {
+  min-width: 220px;
+}
+.max-w-5xl {
+  max-width: 64rem;
+}
+.max-w-\[160px\] {
+  max-width: 160px;
+}
+.max-w-\[180px\] {
+  max-width: 180px;
+}
+.flex-1 {
+  flex: 1 1 0%;
+}
+.shrink-0 {
+  flex-shrink: 0;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.place-items-center {
+  place-items: center;
+}
+.items-start {
+  align-items: flex-start;
+}
+.items-end {
+  align-items: flex-end;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-1 {
+  gap: 0.25rem;
+}
+.gap-2 {
+  gap: 0.5rem;
+}
+.gap-3 {
+  gap: 0.75rem;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.gap-5 {
+  gap: 1.25rem;
+}
+.gap-6 {
+  gap: 1.5rem;
+}
+.space-y-0\.5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.125rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.125rem * var(--tw-space-y-reverse));
+}
+.space-y-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
+}
+.space-y-1\.5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.375rem * var(--tw-space-y-reverse));
+}
+.space-y-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
+}
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
+}
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+.space-y-5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
+}
+.space-y-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.overflow-y-auto {
+  overflow-y: auto;
+}
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rounded-2xl {
+  border-radius: 1rem;
+}
+.rounded-full {
+  border-radius: 9999px;
+}
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+.rounded-md {
+  border-radius: 0.375rem;
+}
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+.border {
+  border-width: 1px;
+}
+.border-2 {
+  border-width: 2px;
+}
+.border-b {
+  border-bottom-width: 1px;
+}
+.border-t {
+  border-top-width: 1px;
+}
+.border-dashed {
+  border-style: dashed;
+}
+.border-badge-donotBorder {
+  --tw-border-opacity: 1;
+  border-color: rgb(127 29 29 / var(--tw-border-opacity, 1));
+}
+.border-badge-holdBorder {
+  --tw-border-opacity: 1;
+  border-color: rgb(146 64 14 / var(--tw-border-opacity, 1));
+}
+.border-badge-lossBorder {
+  --tw-border-opacity: 1;
+  border-color: rgb(127 29 29 / var(--tw-border-opacity, 1));
+}
+.border-badge-lossBorder\/45 {
+  border-color: rgb(127 29 29 / 0.45);
+}
+.border-badge-profitBorder {
+  --tw-border-opacity: 1;
+  border-color: rgb(6 95 70 / var(--tw-border-opacity, 1));
+}
+.border-badge-sellBorder {
+  --tw-border-opacity: 1;
+  border-color: rgb(47 170 101 / var(--tw-border-opacity, 1));
+}
+.border-border-soft {
+  --tw-border-opacity: 1;
+  border-color: rgb(26 48 40 / var(--tw-border-opacity, 1));
+}
+.border-border-soft\/40 {
+  border-color: rgb(26 48 40 / 0.4);
+}
+.border-border-strong {
+  --tw-border-opacity: 1;
+  border-color: rgb(36 80 64 / var(--tw-border-opacity, 1));
+}
+.border-green-500\/30 {
+  border-color: rgb(34 197 94 / 0.3);
+}
+.border-green-500\/40 {
+  border-color: rgb(34 197 94 / 0.4);
+}
+.border-green-500\/50 {
+  border-color: rgb(34 197 94 / 0.5);
+}
+.border-green-neon {
+  --tw-border-opacity: 1;
+  border-color: rgb(47 170 101 / var(--tw-border-opacity, 1));
+}
+.border-green-neon\/50 {
+  border-color: rgb(47 170 101 / 0.5);
+}
+.border-red-500\/40 {
+  border-color: rgb(239 68 68 / 0.4);
+}
+.border-red-500\/50 {
+  border-color: rgb(239 68 68 / 0.5);
+}
+.border-yellow-400\/30 {
+  border-color: rgb(250 204 21 / 0.3);
+}
+.border-yellow-400\/40 {
+  border-color: rgb(250 204 21 / 0.4);
+}
+.border-yellow-400\/50 {
+  border-color: rgb(250 204 21 / 0.5);
+}
+.border-t-transparent {
+  border-top-color: transparent;
+}
+.bg-badge-donotBg {
+  --tw-bg-opacity: 1;
+  background-color: rgb(42 15 15 / var(--tw-bg-opacity, 1));
+}
+.bg-badge-holdBg {
+  --tw-bg-opacity: 1;
+  background-color: rgb(42 37 16 / var(--tw-bg-opacity, 1));
+}
+.bg-badge-lossBg {
+  --tw-bg-opacity: 1;
+  background-color: rgb(42 15 15 / var(--tw-bg-opacity, 1));
+}
+.bg-badge-lossBg\/40 {
+  background-color: rgb(42 15 15 / 0.4);
+}
+.bg-badge-profitBg {
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 42 26 / var(--tw-bg-opacity, 1));
+}
+.bg-badge-sellBg {
+  --tw-bg-opacity: 1;
+  background-color: rgb(26 46 26 / var(--tw-bg-opacity, 1));
+}
+.bg-bg-cardHover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 32 25 / var(--tw-bg-opacity, 1));
+}
+.bg-bg-cardHover\/20 {
+  background-color: rgb(17 32 25 / 0.2);
+}
+.bg-bg-cardHover\/30 {
+  background-color: rgb(17 32 25 / 0.3);
+}
+.bg-bg-cardHover\/40 {
+  background-color: rgb(17 32 25 / 0.4);
+}
+.bg-bg-elevated {
+  --tw-bg-opacity: 1;
+  background-color: rgb(7 18 16 / var(--tw-bg-opacity, 1));
+}
+.bg-bg-elevated\/30 {
+  background-color: rgb(7 18 16 / 0.3);
+}
+.bg-bg-elevated\/50 {
+  background-color: rgb(7 18 16 / 0.5);
+}
+.bg-bg-elevated\/95 {
+  background-color: rgb(7 18 16 / 0.95);
+}
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+.bg-black\/60 {
+  background-color: rgb(0 0 0 / 0.6);
+}
+.bg-black\/65 {
+  background-color: rgb(0 0 0 / 0.65);
+}
+.bg-black\/70 {
+  background-color: rgb(0 0 0 / 0.7);
+}
+.bg-green-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity, 1));
+}
+.bg-green-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
+}
+.bg-green-500\/10 {
+  background-color: rgb(34 197 94 / 0.1);
+}
+.bg-green-500\/5 {
+  background-color: rgb(34 197 94 / 0.05);
+}
+.bg-green-neon {
+  --tw-bg-opacity: 1;
+  background-color: rgb(47 170 101 / var(--tw-bg-opacity, 1));
+}
+.bg-green-neon\/10 {
+  background-color: rgb(47 170 101 / 0.1);
+}
+.bg-red-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 113 113 / var(--tw-bg-opacity, 1));
+}
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1));
+}
+.bg-red-500\/10 {
+  background-color: rgb(239 68 68 / 0.1);
+}
+.bg-white\/10 {
+  background-color: rgb(255 255 255 / 0.1);
+}
+.bg-yellow-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(250 204 21 / var(--tw-bg-opacity, 1));
+}
+.bg-yellow-400\/10 {
+  background-color: rgb(250 204 21 / 0.1);
+}
+.bg-brand-gradient {
+  background-image: linear-gradient(135deg, #0D5C35 0%, #2FAA65 50%, #2DE2E6 100%);
+}
+.bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
+}
+.bg-green-gradient {
+  background-image: linear-gradient(135deg, #0D5C35 0%, #2FAA65 100%);
+}
+.from-bg-card {
+  --tw-gradient-from: #0C1A14 var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(12 26 20 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+.to-slate-950\/70 {
+  --tw-gradient-to: rgb(2 6 23 / 0.7) var(--tw-gradient-to-position);
+}
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.p-3 {
+  padding: 0.75rem;
+}
+.p-3\.5 {
+  padding: 0.875rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-5 {
+  padding: 1.25rem;
+}
+.p-6 {
+  padding: 1.5rem;
+}
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.px-2\.5 {
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.py-0\.5 {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.py-1\.5 {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.py-2\.5 {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.pb-1\.5 {
+  padding-bottom: 0.375rem;
+}
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+.pt-4 {
+  padding-top: 1rem;
+}
+.text-center {
+  text-align: center;
+}
+.font-display {
+  font-family: Poppins, Inter, system-ui, sans-serif;
+}
+.font-mono {
+  font-family: JetBrains Mono, ui-monospace, monospace;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.text-\[10px\] {
+  font-size: 10px;
+}
+.text-\[11px\] {
+  font-size: 11px;
+}
+.text-\[9px\] {
+  font-size: 9px;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+.font-bold {
+  font-weight: 700;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.uppercase {
+  text-transform: uppercase;
+}
+.leading-5 {
+  line-height: 1.25rem;
+}
+.leading-6 {
+  line-height: 1.5rem;
+}
+.leading-7 {
+  line-height: 1.75rem;
+}
+.tracking-\[0\.06em\] {
+  letter-spacing: 0.06em;
+}
+.tracking-\[0\.08em\] {
+  letter-spacing: 0.08em;
+}
+.tracking-tight {
+  letter-spacing: -0.025em;
+}
+.tracking-wide {
+  letter-spacing: 0.025em;
+}
+.tracking-widest {
+  letter-spacing: 0.1em;
+}
+.text-badge-donotText {
+  --tw-text-opacity: 1;
+  color: rgb(248 113 113 / var(--tw-text-opacity, 1));
+}
+.text-badge-holdText {
+  --tw-text-opacity: 1;
+  color: rgb(252 211 77 / var(--tw-text-opacity, 1));
+}
+.text-badge-lossText {
+  --tw-text-opacity: 1;
+  color: rgb(252 165 165 / var(--tw-text-opacity, 1));
+}
+.text-badge-profitText {
+  --tw-text-opacity: 1;
+  color: rgb(110 231 183 / var(--tw-text-opacity, 1));
+}
+.text-badge-sellText {
+  --tw-text-opacity: 1;
+  color: rgb(74 222 128 / var(--tw-text-opacity, 1));
+}
+.text-bg-canvas {
+  --tw-text-opacity: 1;
+  color: rgb(3 10 6 / var(--tw-text-opacity, 1));
+}
+.text-blue-400 {
+  --tw-text-opacity: 1;
+  color: rgb(96 165 250 / var(--tw-text-opacity, 1));
+}
+.text-blue-ai {
+  --tw-text-opacity: 1;
+  color: rgb(77 163 255 / var(--tw-text-opacity, 1));
+}
+.text-cyan-300 {
+  --tw-text-opacity: 1;
+  color: rgb(103 232 249 / var(--tw-text-opacity, 1));
+}
+.text-cyan-neon {
+  --tw-text-opacity: 1;
+  color: rgb(45 226 230 / var(--tw-text-opacity, 1));
+}
+.text-green-400 {
+  --tw-text-opacity: 1;
+  color: rgb(74 222 128 / var(--tw-text-opacity, 1));
+}
+.text-green-neon {
+  --tw-text-opacity: 1;
+  color: rgb(47 170 101 / var(--tw-text-opacity, 1));
+}
+.text-red-400 {
+  --tw-text-opacity: 1;
+  color: rgb(248 113 113 / var(--tw-text-opacity, 1));
+}
+.text-text-muted {
+  --tw-text-opacity: 1;
+  color: rgb(90 138 114 / var(--tw-text-opacity, 1));
+}
+.text-text-muted\/30 {
+  color: rgb(90 138 114 / 0.3);
+}
+.text-text-muted\/40 {
+  color: rgb(90 138 114 / 0.4);
+}
+.text-text-muted\/60 {
+  color: rgb(90 138 114 / 0.6);
+}
+.text-text-primary {
+  --tw-text-opacity: 1;
+  color: rgb(232 245 238 / var(--tw-text-opacity, 1));
+}
+.text-text-secondary {
+  --tw-text-opacity: 1;
+  color: rgb(157 191 173 / var(--tw-text-opacity, 1));
+}
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+.text-white\/60 {
+  color: rgb(255 255 255 / 0.6);
+}
+.text-white\/70 {
+  color: rgb(255 255 255 / 0.7);
+}
+.text-yellow-300 {
+  --tw-text-opacity: 1;
+  color: rgb(253 224 71 / var(--tw-text-opacity, 1));
+}
+.opacity-40 {
+  opacity: 0.4;
+}
+.shadow-glow-cyan {
+  --tw-shadow: 0 0 0 1px rgba(45,226,230,0.3), 0 0 30px rgba(45,226,230,0.15);
+  --tw-shadow-colored: 0 0 0 1px var(--tw-shadow-color), 0 0 30px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-glow-green {
+  --tw-shadow: 0 0 0 1px rgba(47,170,101,0.3), 0 0 30px rgba(47,170,101,0.2);
+  --tw-shadow-colored: 0 0 0 1px var(--tw-shadow-color), 0 0 30px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.outline-none {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.blur {
+  --tw-blur: blur(8px);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.backdrop-blur-sm {
+  --tw-backdrop-blur: blur(4px);
+  backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+.duration-300 {
+  transition-duration: 300ms;
+}
+.duration-500 {
+  transition-duration: 500ms;
+}
+
+* { box-sizing: border-box; }
+
+:root {
+  color: #E8F5EE;
+  background: #030A06;
+  font-family: 'Inter', 'Poppins', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body, #root { width: 100%; min-height: 100vh; margin: 0; }
+body { background: #030A06; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #071210; }
+::-webkit-scrollbar-thumb { background: #1A3028; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #2FAA65; }
+
+/* ── Glass card ── */
+.glass {
+  background: rgba(12,26,20,0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(47,170,101,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(47,170,101,0.08);
+}
+
+.glass-strong {
+  background: rgba(7,18,16,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(47,170,101,0.2);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.6), inset 0 1px 0 rgba(47,170,101,0.1);
+}
+
+/* ── Glow effects ── */
+.glow-green { box-shadow: 0 0 0 1px rgba(47,170,101,0.3), 0 0 30px rgba(47,170,101,0.2); }
+.glow-cyan  { box-shadow: 0 0 0 1px rgba(45,226,230,0.3), 0 0 30px rgba(45,226,230,0.15); }
+
+/* ── Layout ── */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(47,170,101,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(45,226,230,0.06) 0%, transparent 50%),
+    #030A06;
+}
+
+.app-content-shell { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.app-main { flex: 1; padding: 24px; overflow-y: auto; }
+
+/* ── Sidebar ── */
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, #071210 0%, #030A06 100%);
+  border-right: 1px solid rgba(47,170,101,0.15);
+  box-shadow: 4px 0 24px rgba(0,0,0,0.4);
+  padding: 20px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+  padding: 0 8px;
+}
+
+.sidebar-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #030A06;
+  background: linear-gradient(135deg, #2FAA65 0%, #2DE2E6 100%);
+  box-shadow: 0 0 0 1px rgba(47,170,101,0.4), 0 0 20px rgba(47,170,101,0.3);
+  flex-shrink: 0;
+}
+
+.sidebar-brand-copy p { margin: 0; font-size: 15px; font-weight: 700; color: #E8F5EE; font-family: 'Poppins', sans-serif; }
+.sidebar-brand-copy small { display: block; margin-top: 2px; color: #5A8A72; font-size: 11px; }
+
+.sidebar-section-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2FAA65;
+  padding: 0 10px;
+  margin: 16px 0 8px;
+}
+
+.sidebar-nav { display: grid; gap: 4px; }
+
+.sidebar-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #5A8A72;
+  padding: 0 10px;
+  transition: all 200ms cubic-bezier(0.22,1,0.36,1);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.sidebar-link:hover {
+  color: #E8F5EE;
+  border-color: rgba(47,170,101,0.2);
+  background: rgba(47,170,101,0.08);
+}
+
+.sidebar-link.active {
+  color: #E8F5EE;
+  border-color: rgba(47,170,101,0.35);
+  background: linear-gradient(90deg, rgba(47,170,101,0.18), rgba(47,170,101,0.05));
+  box-shadow: 0 0 0 1px rgba(47,170,101,0.2), 0 0 20px rgba(47,170,101,0.12);
+}
+
+.sidebar-link.active .sidebar-icon { color: #2FAA65; }
+
+.sidebar-icon { width: 18px; height: 18px; flex-shrink: 0; }
+
+/* ── Navbar ── */
+.top-navbar {
+  height: 68px;
+  border-bottom: 1px solid rgba(47,170,101,0.12);
+  background: rgba(3,10,6,0.85);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 24px;
+  flex-shrink: 0;
+}
+
+.top-navbar-left, .top-navbar-right { display: flex; align-items: center; gap: 14px; }
+.top-navbar-title { margin: 0; font-size: 15px; font-weight: 700; font-family: 'Poppins', sans-serif; color: #E8F5EE; }
+.top-navbar-subtitle { color: #5A8A72; font-size: 11px; }
+
+.status-dot {
+  width: 8px; height: 8px; border-radius: 99px;
+  background: #2FAA65;
+  box-shadow: 0 0 8px rgba(47,170,101,0.8);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 8px rgba(47,170,101,0.8); }
+  50%       { box-shadow: 0 0 16px rgba(47,170,101,1), 0 0 24px rgba(47,170,101,0.4); }
+}
+
+.icon-button {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(47,170,101,0.2);
+  background: rgba(47,170,101,0.06);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+.icon-button:hover { border-color: #2FAA65; background: rgba(47,170,101,0.12); }
+.icon-button span { width: 14px; height: 2px; margin: 0 auto; border-radius: 8px; background: #9DBFAD; }
+
+.user-pill {
+  min-height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(47,170,101,0.2);
+  background: rgba(47,170,101,0.06);
+  display: flex; align-items: center; gap: 10px;
+  padding: 4px 12px 4px 6px;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+.user-pill:hover { border-color: #2FAA65; background: rgba(47,170,101,0.1); }
+.user-avatar {
+  width: 28px; height: 28px; border-radius: 99px;
+  display: grid; place-items: center;
+  font-size: 10px; font-weight: 700; color: #030A06;
+  background: linear-gradient(135deg, #2FAA65, #2DE2E6);
+}
+.user-meta p { margin: 0; font-size: 12px; font-weight: 600; color: #E8F5EE; }
+.user-meta span { font-size: 10px; color: #5A8A72; }
+
+/* ── AI Overlay ── */
+.ai-overlay {
+  position: fixed; inset: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(3,10,6,0.6);
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+.ai-overlay-panel {
+  display: inline-flex; align-items: center; gap: 10px;
+  border-radius: 99px;
+  border: 1px solid rgba(47,170,101,0.3);
+  background: rgba(7,18,16,0.95);
+  padding: 10px 20px;
+  box-shadow: 0 0 0 1px rgba(47,170,101,0.2), 0 0 30px rgba(47,170,101,0.15);
+}
+.ai-overlay-panel p { margin: 0; color: #9DBFAD; font-size: 13px; font-weight: 600; }
+.ai-overlay-spinner {
+  width: 18px; height: 18px; border-radius: 99px;
+  border: 2px solid #2FAA65; border-top-color: transparent;
+}
+
+/* ── Interactive tiles ── */
+.interactive-tile { transition: transform 200ms ease, border-color 200ms ease; }
+.interactive-tile:hover { transform: translateY(-2px); }
+
+/* ── Progress bar ── */
+.progress-bar {
+  height: 6px; border-radius: 99px;
+  background: rgba(47,170,101,0.15);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, #2FAA65, #2DE2E6);
+  transition: width 0.8s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ── Chat ── */
+.chat-bubble-user {
+  background: linear-gradient(135deg, #0D5C35, #2FAA65);
+  border-radius: 18px 18px 4px 18px;
+}
+.chat-bubble-ai {
+  background: rgba(12,26,20,0.8);
+  border: 1px solid rgba(47,170,101,0.2);
+  border-radius: 18px 18px 18px 4px;
+}
+
+@media (max-width: 920px) {
+  .app-layout { flex-direction: column; }
+  .sidebar { position: static; width: 100% !important; height: auto; border-right: none; border-bottom: 1px solid rgba(47,170,101,0.15); }
+  .app-main { padding: 16px; }
+}
+
+.hover\:-translate-y-0\.5:hover {
+  --tw-translate-y: -0.125rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.hover\:border-border-strong:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(36 80 64 / var(--tw-border-opacity, 1));
+}
+
+.hover\:border-green-neon:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(47 170 101 / var(--tw-border-opacity, 1));
+}
+
+.hover\:border-green-neon\/40:hover {
+  border-color: rgb(47 170 101 / 0.4);
+}
+
+.hover\:text-green-neon:hover {
+  --tw-text-opacity: 1;
+  color: rgb(47 170 101 / var(--tw-text-opacity, 1));
+}
+
+.hover\:text-text-primary:hover {
+  --tw-text-opacity: 1;
+  color: rgb(232 245 238 / var(--tw-text-opacity, 1));
+}
+
+.hover\:shadow-card-lg:hover {
+  --tw-shadow: 0 12px 48px rgba(0,0,0,0.6);
+  --tw-shadow-colored: 0 12px 48px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.hover\:brightness-110:hover {
+  --tw-brightness: brightness(1.1);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.disabled\:cursor-not-allowed:disabled {
+  cursor: not-allowed;
+}
+
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
+}
+
+.disabled\:opacity-60:disabled {
+  opacity: 0.6;
+}
+
+.disabled\:opacity-70:disabled {
+  opacity: 0.7;
+}
+
+@media (min-width: 640px) {
+
+  .sm\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+
+  .md\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+
+  .lg\:grid-cols-\[1\.05fr_0\.95fr\] {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+}
+
+@media (min-width: 1280px) {
+
+  .xl\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
+  .xl\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+
+  .xl\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-\[1\.1fr_0\.9fr\] {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+}
+</style><style type="text/css" data-vite-dev-id="D:/sem6/MDM/project/frontend/src/App.css">.app-layout {
+  min-height: 100vh;
+  display: flex;
+  background:
+    radial-gradient(circle at 4% 12%, rgba(45, 226, 230, 0.12), transparent 34%),
+    radial-gradient(circle at 88% 6%, rgba(77, 163, 255, 0.2), transparent 30%),
+    #05080f;
+  color: #eaf2ff;
+}
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  flex-shrink: 0;
+  border-right: 1px solid #22314d;
+  background: linear-gradient(180deg, #0b1220 0%, #0a1221 100%);
+  box-shadow: 0 18px 38px rgba(3, 8, 20, 0.42);
+  padding: 20px 12px;
+  overflow: hidden;
+}
+
+.sidebar-brand {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 0 8px;
+}
+
+.sidebar-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #eaf2ff;
+  background: linear-gradient(135deg, #2b6fd6 0%, #2faa65 100%);
+  box-shadow: 0 0 0 1px rgba(77, 163, 255, 0.25), 0 0 20px rgba(77, 163, 255, 0.2);
+}
+
+.sidebar-brand-copy p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.sidebar-brand-copy small {
+  display: block;
+  margin-top: 2px;
+  color: #9ab1d3;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
+.sidebar-nav {
+  display: grid;
+  gap: 8px;
+}
+
+.sidebar-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #b4c0d9;
+  padding: 0 10px;
+  transition: all 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sidebar-link.collapsed {
+  justify-content: center;
+}
+
+.sidebar-link:hover {
+  transform: translateX(2px);
+  color: #eaf2ff;
+  border-color: #30456b;
+  background: rgba(23, 34, 53, 0.7);
+}
+
+.sidebar-link.active {
+  color: #eaf2ff;
+  border-color: rgba(45, 226, 230, 0.28);
+  background: linear-gradient(90deg, rgba(45, 226, 230, 0.14), rgba(45, 226, 230, 0.03));
+  box-shadow: 0 0 0 1px rgba(45, 226, 230, 0.18), 0 0 24px rgba(45, 226, 230, 0.14);
+}
+
+.sidebar-link-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  background: #2de2e6;
+  box-shadow: 0 0 12px rgba(45, 226, 230, 0.45);
+}
+
+.sidebar-link-label {
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.app-content-shell {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-navbar {
+  height: 72px;
+  border-bottom: 1px solid #22314d;
+  background: rgba(9, 16, 29, 0.82);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 22px;
+}
+
+.top-navbar-left,
+.top-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.top-navbar-title {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.top-navbar-subtitle {
+  color: #91a6cb;
+  font-size: 12px;
+}
+
+.icon-button {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #30456b;
+  background: #132138;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.icon-button:hover {
+  transform: translateY(-1px);
+  border-color: #4da3ff;
+  box-shadow: 0 0 0 1px rgba(77, 163, 255, 0.25), 0 0 18px rgba(77, 163, 255, 0.2);
+}
+
+.icon-button span {
+  width: 14px;
+  height: 2px;
+  margin: 0 auto;
+  border-radius: 8px;
+  background: #d6e6ff;
+}
+
+.notification-button {
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid #30456b;
+  background: #12203a;
+  color: #d9e7ff;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 11px;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.notification-button:hover {
+  transform: translateY(-1px);
+  border-color: #2de2e6;
+  box-shadow: 0 0 0 1px rgba(45, 226, 230, 0.22), 0 0 18px rgba(45, 226, 230, 0.16);
+}
+
+.notification-count {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #091425;
+  background: #2de2e6;
+}
+
+.user-pill {
+  min-height: 44px;
+  border-radius: 12px;
+  border: 1px solid #30456b;
+  background: #121f35;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 11px 5px 7px;
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.user-pill:hover {
+  transform: translateY(-1px);
+  border-color: #4da3ff;
+}
+
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #081420;
+  background: linear-gradient(120deg, #4da3ff, #2de2e6);
+}
+
+.user-meta p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.user-meta span {
+  font-size: 11px;
+  color: #95a9cd;
+}
+
+.app-main {
+  flex: 1;
+  padding: 24px;
+}
+
+.interactive-tile {
+  transition: transform 200ms ease, border-color 200ms ease, background 200ms ease;
+}
+
+.interactive-tile:hover {
+  transform: translateY(-2px);
+  border-color: #30456b;
+}
+
+.ai-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(4, 9, 18, 0.56);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+
+.ai-overlay-panel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  border: 1px solid #30456b;
+  background: rgba(11, 18, 32, 0.94);
+  padding: 10px 16px;
+  box-shadow: 0 0 0 1px rgba(77, 163, 255, 0.2), 0 0 24px rgba(45, 226, 230, 0.14);
+}
+
+.ai-overlay-panel p {
+  margin: 0;
+  color: #b4c0d9;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.ai-overlay-spinner {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  border: 2px solid #2de2e6;
+  border-top-color: transparent;
+}
+
+.page-section {
+  display: grid;
+  gap: 20px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.page-header p {
+  margin: 8px 0 0;
+  color: #a8bcde;
+  font-size: 14px;
+}
+
+.page-placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.placeholder-card {
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid #22314d;
+  background: linear-gradient(180deg, #121b2d 0%, #0f1829 100%);
+  color: #9fb5d7;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  box-shadow: 0 12px 28px rgba(3, 8, 20, 0.32);
+}
+
+@media (max-width: 1100px) {
+  .page-placeholder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 920px) {
+  .app-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100% !important;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid #22314d;
+  }
+
+  .sidebar-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sidebar-link,
+  .sidebar-link.collapsed {
+    justify-content: flex-start;
+  }
+
+  .sidebar-link-label {
+    display: block !important;
+    opacity: 1 !important;
+  }
+
+  .top-navbar {
+    height: auto;
+    min-height: 72px;
+    padding: 12px 16px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .top-navbar-left,
+  .top-navbar-right {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .app-main {
+    padding: 18px 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .page-placeholder-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style></head>
+  <body>
+    <div id="root"><div class="app-layout"><aside class="sidebar" style="width: 260px;"><div class="sidebar-brand"><div class="sidebar-brand-mark"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain" aria-hidden="true"><path d="M12 18V5"></path><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"></path><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"></path><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"></path><path d="M18 18a4 4 0 0 0 2-7.464"></path><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"></path><path d="M6 18a4 4 0 0 1-2-7.464"></path><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"></path></svg></div><div class="sidebar-brand-copy" style="opacity: 1; display: block; transform: none;"><p>AgriIntel</p><small>AI Platform</small></div></div><nav class="flex-1 overflow-y-auto" aria-label="Primary navigation"><div><p class="sidebar-section-label">Core</p><div class="sidebar-nav mb-2"><a class="sidebar-link" href="http://localhost:5173/" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard sidebar-icon" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg><span style="opacity: 1; display: block; transform: none;">Dashboard</span></a><a aria-current="page" class="sidebar-link active" href="http://localhost:5173/smart-decision" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap sidebar-icon" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg><span style="opacity: 1; display: block; transform: none;">Smart Decision</span></a></div></div><div><p class="sidebar-section-label">Analysis</p><div class="sidebar-nav mb-2"><a class="sidebar-link" href="http://localhost:5173/sell-timing" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-line sidebar-icon" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="m19 9-5 5-4-4-3 3"></path></svg><span style="opacity: 1; display: block; transform: none;">Sell Timing</span></a><a class="sidebar-link" href="http://localhost:5173/market-intelligence" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chart-column sidebar-icon" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"></path><path d="M18 17V9"></path><path d="M13 17V5"></path><path d="M8 17v-3"></path></svg><span style="opacity: 1; display: block; transform: none;">Market Intelligence</span></a><a class="sidebar-link" href="http://localhost:5173/crop-recommendation" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-leaf sidebar-icon" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg><span style="opacity: 1; display: block; transform: none;">Crop Recommendation</span></a></div></div><div><p class="sidebar-section-label">AI</p><div class="sidebar-nav mb-2"><a class="sidebar-link" href="http://localhost:5173/model-performance" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-microscope sidebar-icon" aria-hidden="true"><path d="M6 18h8"></path><path d="M3 22h18"></path><path d="M14 22a7 7 0 1 0 0-14h-1"></path><path d="M9 14h2"></path><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"></path><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"></path></svg><span style="opacity: 1; display: block; transform: none;">Model Insights</span></a><a class="sidebar-link" href="http://localhost:5173/voice-assistant" data-discover="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-headphones sidebar-icon" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg><span style="opacity: 1; display: block; transform: none;">Voice Assistant</span></a></div></div></nav><div class="mt-auto pt-4 border-t border-border-soft px-2"><p class="text-xs text-text-muted text-center">v1.0.0 · AgriIntel AI</p></div></aside><div class="app-content-shell"><header class="top-navbar" style="opacity: 1; transform: none;"><div class="top-navbar-left"><button type="button" class="icon-button" aria-label="Toggle sidebar"><span></span><span></span><span></span></button><div><p class="top-navbar-title">AgriIntel AI</p><span class="top-navbar-subtitle">Crop Intelligence Platform</span></div></div><div class="top-navbar-right"><div class="flex items-center gap-1 rounded-lg border border-border-soft bg-bg-elevated px-1 py-1"><button type="button" class="rounded-md px-2.5 py-1 text-xs font-bold tracking-wide transition bg-brand-neonCyan/20 text-brand-neonCyan border border-brand-neonCyan/40">EN</button><button type="button" class="rounded-md px-2.5 py-1 text-xs font-bold tracking-wide transition text-text-muted hover:text-text-primary">HI</button><button type="button" class="rounded-md px-2.5 py-1 text-xs font-bold tracking-wide transition text-text-muted hover:text-text-primary">MR</button></div><div class="flex items-center gap-2 rounded-lg border border-border-soft bg-bg-elevated px-3 py-1.5"><div class="status-dot"></div><span class="text-xs font-medium text-green-neon">System Online</span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi text-green-neon ml-1" aria-hidden="true"><path d="M12 20h.01"></path><path d="M2 8.82a15 15 0 0 1 20 0"></path><path d="M5 12.859a10 10 0 0 1 14 0"></path><path d="M8.5 16.429a5 5 0 0 1 7 0"></path></svg></div><button type="button" class="relative rounded-lg border border-border-soft bg-bg-elevated p-2 text-text-muted hover:border-green-neon hover:text-green-neon transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg><span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-green-neon text-bg-canvas text-[9px] font-bold grid place-items-center">3</span></button><div class="user-pill"><div class="user-avatar">AI</div><div class="user-meta"><p>AgriIntel</p><span>AI System</span></div></div></div></header><main class="app-main" style="opacity: 1; filter: blur(0px); transform: none;"><div class="space-y-5"><section style="opacity: 1; transform: none;"><div class="rounded-2xl border border-border-soft bg-gradient-to-b from-bg-card to-slate-950/70 shadow-card-md transition-all duration-300 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-card-lg"><div class="space-y-1.5 p-5"><p class="text-sm text-text-secondary">Image validation + CNN freshness + 9-feature price classification + why-based hold guidance</p><h3 class="font-display text-base font-semibold tracking-tight text-text-primary">Smart Crop Decision Engine</h3></div><div class="px-5 pb-5 space-y-4"><div class="grid gap-4 md:grid-cols-2"><div class="space-y-2"><span class="text-xs font-semibold uppercase tracking-[0.08em] text-text-muted">Crop Image</span><div class="flex h-11 cursor-pointer items-center gap-2 rounded-xl border px-3 text-sm transition border-brand-neonCyan/50 bg-brand-neonCyan/10 text-brand-neonCyan"><svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5V19a1 1 0 001 1h16a1 1 0 001-1v-2.5M16 10l-4-4m0 0L8 10m4-4v12"></path></svg><span class="truncate">Sample image.jpg</span></div><input accept="image/jpeg,image/png,image/webp,image/bmp" class="hidden" type="file"></div><div class="space-y-2"><span class="text-xs font-semibold uppercase tracking-[0.08em] text-text-muted">Crop Name Hint</span><input placeholder="e.g. apple, mango, tomato, onion" class="h-11 w-full rounded-xl border border-border-soft bg-bg-cardHover px-3 text-sm text-text-primary outline-none transition focus:border-brand-neonCyan" type="text" value=""><p class="text-xs text-text-muted">Used for commodity encoding, web price lookup, and result explanations.</p></div></div><div class="flex items-center gap-4"><button type="button" class="h-11 rounded-xl bg-brand-gradient px-6 text-sm font-semibold text-text-primary shadow-card-sm transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70">Analyze Crop</button><img alt="preview" class="h-11 w-11 rounded-xl border border-border-soft object-cover" src="blob:http://localhost:5173/573977cc-421f-4412-8df3-a31a76162810"></div></div></div></section><section style="opacity: 1; transform: none;"><div class="rounded-2xl border bg-gradient-to-b from-bg-card to-slate-950/70 shadow-card-md transition-all duration-300 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-card-lg min-h-[260px] border-border-strong"><div class="space-y-1.5 p-5"><p class="text-sm text-text-secondary">Output</p><h3 class="font-display text-base font-semibold tracking-tight text-text-primary">Decision Result</h3></div><div class="px-5 pb-5"><div class="space-y-4" style="opacity: 1; transform: none;"><div class="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]"><div class="relative overflow-hidden rounded-xl border border-border-soft bg-black"><div class="bg-black/60 px-3 py-1.5 text-center text-xs font-bold tracking-widest text-white/70">AI Crop Analysis</div><img alt="analyzed" class="h-64 w-full object-contain" src="blob:http://localhost:5173/573977cc-421f-4412-8df3-a31a76162810"><div class="absolute inset-x-0 bottom-0 space-y-0.5 bg-black/65 px-3 py-2 backdrop-blur-sm"><p class="font-mono text-sm font-bold"><span class="text-white/60">Fruit Check: </span><span class="text-green-400">Detected</span></p><p class="font-mono text-sm font-bold"><span class="text-white/60">Fruit Confidence: </span><span class="text-cyan-300">5.1%</span></p><p class="font-mono text-sm font-bold"><span class="text-white/60">Freshness: </span><span class="text-green-400">Fresh</span></p><p class="font-mono text-sm font-bold"><span class="text-white/60">Decision: </span><span class="text-green-400">SELL</span></p></div></div><div class="space-y-3"><div class="rounded-xl border p-4 border-green-500/40 bg-green-500/10 text-green-400"><p class="text-xs uppercase tracking-[0.08em] text-text-muted">Final Recommendation</p><p class="mt-2 text-lg font-bold">SELL</p><p class="mt-1 text-xs text-text-muted">Price class: High | Model: random_forest</p></div><div class="rounded-xl border p-4 border-green-500/40 bg-green-500/10 text-green-400"><p class="text-xs uppercase tracking-[0.08em] text-text-muted">Freshness Confidence</p><p class="mt-2 text-lg font-bold">67.9%</p><p class="mt-1 text-xs text-text-muted">The freshness CNN sees strong fresh-quality visual signals in the uploaded image.</p></div><div class="rounded-xl border p-4 border-border-soft bg-bg-cardHover/30 text-text-primary"><p class="text-xs uppercase tracking-[0.08em] text-text-muted">Hold Guidance</p><p class="mt-2 text-lg font-bold">Do not hold</p><p class="mt-1 text-xs text-text-muted">Not holding for several extra days is better because the present market window already looks strong.</p></div></div></div><div class="grid gap-3 md:grid-cols-3"><div class="rounded-xl border p-4 border-border-soft bg-bg-cardHover/30 text-text-primary"><p class="text-xs uppercase tracking-[0.08em] text-text-muted">Estimated Market Price</p><p class="mt-2 text-lg font-bold">INR 2,500 - 4,500</p><p class="mt-1 text-xs text-text-muted">Dataset fallback</p></div><div class="rounded-xl border p-4 border-border-soft bg-bg-cardHover/30 text-text-primary"><p class="text-xs uppercase tracking-[0.08em] text-text-muted">Price Probabilities</p><p class="mt-2 text-lg font-bold">High 84%</p><p class="mt-1 text-xs text-text-muted">Medium 11% | Low 5%</p></div><div class="rounded-xl border p-4 border-border-soft bg-bg-cardHover/30 text-text-primary"><p class="text-xs uppercase tracking-[0.08em] text-text-muted">Cluster Signal</p><p class="mt-2 text-lg font-bold">Unavailable</p><p class="mt-1 text-xs text-text-muted">K-means model not available</p></div></div><div class="grid gap-4 md:grid-cols-2"><div class="rounded-xl border border-border-soft bg-bg-cardHover/30 p-4"><p class="text-xs uppercase tracking-[0.08em] text-text-muted">Why This Price</p><p class="mt-2 text-sm leading-6 text-text-secondary">The high price class was selected with confidence 0.84. Cluster N/A was used as an additional market-pattern signal.</p><p class="mt-3 text-xs text-text-muted">Very wide price spread suggests volatility, so quality and timing matter a lot.</p></div><div class="rounded-xl border border-border-soft bg-bg-cardHover/30 p-4"><p class="text-xs uppercase tracking-[0.08em] text-text-muted">Why This Price With Image</p><p class="mt-2 text-sm leading-6 text-text-secondary">The image looks market-ready and the estimated price band of INR 2,500 to INR 4,500 supports a stronger selling opportunity.</p><p class="mt-3 text-xs text-text-muted">The market is paying premium prices, but volatility is high, so timely selling matters.</p></div></div><div class="rounded-xl border p-4 border-green-500/50 bg-green-500/10"><div class="mb-2 flex items-center gap-2"><span class="rounded-full border border-brand-neonCyan/40 bg-brand-neonCyan/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-brand-neonCyan">Decision Why</span><p class="text-xs uppercase tracking-[0.08em] text-text-muted">Hold / Sell Explanation</p></div><p class="text-sm leading-7 text-text-secondary">The crop looks fresh and the price model indicates a favorable selling window.</p><p class="mt-3 text-sm leading-7 text-text-secondary">If dispatch is delayed briefly, keep the produce shaded, ventilated, and dry so current quality is preserved until sale.</p></div><div class="rounded-xl border border-border-soft bg-bg-cardHover/20 p-4"><p class="mb-3 text-xs uppercase tracking-[0.08em] text-text-muted">Feature Contributions to Price Confidence</p><div class="space-y-3"><div class="space-y-1"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="text-xs font-semibold text-text-primary">Price Range</span><span class="rounded-full border border-border-soft px-2 py-0.5 text-[10px] text-text-muted">INR 2,500 – 4,500</span></div><span class="text-xs font-bold text-green-400">57%</span></div><div class="h-1.5 w-full overflow-hidden rounded-full bg-bg-cardHover"><div class="h-full rounded-full bg-green-500" style="width: 57%;"></div></div><p class="text-xs leading-5 text-text-muted">A wide spread of INR 2,000 signals strong buyer demand.</p></div><div class="space-y-1"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="text-xs font-semibold text-text-primary">Commodity</span><span class="rounded-full border border-border-soft px-2 py-0.5 text-[10px] text-text-muted">Apple</span></div><span class="text-xs font-bold text-green-400">50%</span></div><div class="h-1.5 w-full overflow-hidden rounded-full bg-bg-cardHover"><div class="h-full rounded-full bg-green-500" style="width: 50%;"></div></div><p class="text-xs leading-5 text-text-muted">Apple is the primary crop signal used by the model to anchor price class expectations.</p></div><div class="space-y-1"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="text-xs font-semibold text-text-primary">Market Location</span><span class="rounded-full border border-border-soft px-2 py-0.5 text-[10px] text-text-muted">Pune APMC, Pune, Maharashtra</span></div><span class="text-xs font-bold text-green-400">43%</span></div><div class="h-1.5 w-full overflow-hidden rounded-full bg-bg-cardHover"><div class="h-full rounded-full bg-green-500" style="width: 43%;"></div></div><p class="text-xs leading-5 text-text-muted">The Pune APMC market in Pune shapes regional price expectations for this commodity.</p></div><div class="space-y-1"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="text-xs font-semibold text-text-primary">Variety</span><span class="rounded-full border border-border-soft px-2 py-0.5 text-[10px] text-text-muted">Apple</span></div><span class="text-xs font-bold text-green-400">29%</span></div><div class="h-1.5 w-full overflow-hidden rounded-full bg-bg-cardHover"><div class="h-full rounded-full bg-green-500" style="width: 29%;"></div></div><p class="text-xs leading-5 text-text-muted">Variety 'Apple' carries its own historical price premium or discount relative to the base commodity.</p></div><div class="space-y-1"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="text-xs font-semibold text-text-primary">Grade</span><span class="rounded-full border border-border-soft px-2 py-0.5 text-[10px] text-text-muted">FAQ</span></div><span class="text-xs font-bold text-green-400">24%</span></div><div class="h-1.5 w-full overflow-hidden rounded-full bg-bg-cardHover"><div class="h-full rounded-full bg-green-500" style="width: 24%;"></div></div><p class="text-xs leading-5 text-text-muted">Grade 'FAQ' directly affects buyer willingness to pay — higher grades attract premium bids.</p></div><div class="space-y-1"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="text-xs font-semibold text-text-primary">Arrival Date</span><span class="rounded-full border border-border-soft px-2 py-0.5 text-[10px] text-text-muted">01/03/2026</span></div><span class="text-xs font-bold text-yellow-300">19%</span></div><div class="h-1.5 w-full overflow-hidden rounded-full bg-bg-cardHover"><div class="h-full rounded-full bg-yellow-400" style="width: 19%;"></div></div><p class="text-xs leading-5 text-text-muted">Seasonal arrival patterns encoded from the date influence supply-demand balance in the model.</p></div></div></div><div class="rounded-xl border border-brand-neonCyan/30 bg-brand-neonCyan/10 p-4"><p class="text-xs uppercase tracking-[0.08em] text-brand-neonCyan">Model Context Used</p><div class="mt-3 grid gap-2 text-sm text-text-secondary md:grid-cols-2"><p>State: Maharashtra</p><p>District: Pune</p><p>Market: Pune APMC</p><p>Commodity: Apple</p><p>Variety: Apple</p><p>Grade: FAQ</p></div><p class="mt-3 text-xs text-text-muted">Web Query: fruit crop mandi price India today per quintal</p></div><div class="rounded-xl border border-green-500/30 bg-green-500/10 p-4"><p class="text-xs uppercase tracking-[0.08em] text-green-400">Full Analysis</p><p class="mt-2 text-sm leading-7 text-text-primary">YOLO detected 'apple' with confidence 0.54. The auxiliary fruit classifier suggested 'rotten apple' with confidence 0.05. The freshness CNN sees strong fresh-quality visual signals in the uploaded image. Live web prices were unavailable, so dataset-backed fallback prices for 'default' were used. The high price class was selected with confidence 0.84. Cluster N/A was used as an additional market-pattern signal. The crop looks fresh and the price model indicates a favorable selling window. Do not hold for long because the current price class is already favorable for sale. If dispatch is delayed briefly, keep the produce shaded, ventilated, and dry so current quality is preserved until sale.</p></div></div></div></div></section><section style="opacity: 1; transform: none;"><div class="rounded-2xl border bg-gradient-to-b from-bg-card to-slate-950/70 shadow-card-md transition-all duration-300 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-card-lg border-brand-neonCyan/30"><div class="space-y-1.5 p-5"><p class="text-sm text-text-secondary">Explainability</p><h3 class="font-display text-base font-semibold tracking-tight text-text-primary">Why this recommendation?</h3></div><div class="px-5 pb-5 grid gap-3 md:grid-cols-3"><div class="rounded-xl border border-border-soft bg-bg-cardHover/40 p-4"><p class="text-sm leading-6 text-text-secondary">1. Fruit check: YOLO detected 'apple' with confidence 0.54. The auxiliary fruit classifier suggested 'rotten apple' with confidence 0.05.</p></div><div class="rounded-xl border border-border-soft bg-bg-cardHover/40 p-4"><p class="text-sm leading-6 text-text-secondary">2. CNN freshness: The freshness CNN sees strong fresh-quality visual signals in the uploaded image.</p></div><div class="rounded-xl border border-border-soft bg-bg-cardHover/40 p-4"><p class="text-sm leading-6 text-text-secondary">3. Crop price: predicted High class using random_forest.</p></div><div class="rounded-xl border border-border-soft bg-bg-cardHover/40 p-4"><p class="text-sm leading-6 text-text-secondary">4. Web search: Live web prices were unavailable, so dataset-backed fallback prices for 'default' were used.</p></div><div class="rounded-xl border border-border-soft bg-bg-cardHover/40 p-4"><p class="text-sm leading-6 text-text-secondary">5. Image-price link: The image looks market-ready and the estimated price band of INR 2,500 to INR 4,500 supports a stronger selling opportunity.</p></div><div class="rounded-xl border border-border-soft bg-bg-cardHover/40 p-4"><p class="text-sm leading-6 text-text-secondary">6. Hold or not: The crop looks fresh and the price model indicates a favorable selling window.</p></div><div class="rounded-xl border border-border-soft bg-bg-cardHover/40 p-4"><p class="text-sm leading-6 text-text-secondary">7. Why hold / not hold: Not holding for several extra days is better because the present market window already looks strong.</p></div><div class="rounded-xl border border-border-soft bg-bg-cardHover/40 p-4"><p class="text-sm leading-6 text-text-secondary">8. Holding plan: If dispatch is delayed briefly, keep the produce shaded, ventilated, and dry so current quality is preserved until sale.</p></div></div></div></section></div></main></div></div></div>
+    <script type="module" src="http://localhost:5173/src/main.jsx"></script>
+  
+
+</body></html>

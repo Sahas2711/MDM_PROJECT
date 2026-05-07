@@ -1,0 +1,27 @@
+
+> agriintel-ai-dashboard@0.0.0 dev
+> vite --host 0.0.0.0
+
+Port 5173 is in use, trying another one...
+[2m3:40:56 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m Re-optimizing dependencies because vite config has changed
+
+  [32m[1mVITE[22m v8.0.8[39m  [2mready in [0m[1m448[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5174[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://10.100.30.252:[1m5174[22m/[39m
+[2m3:52:46 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2msrc/pages/VoiceAssistant.jsx[22m
+[2m4:14:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m4:14:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m4:37:18 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m4:37:18 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m6:18:07 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m6:39:01 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m6:39:44 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m6:39:54 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m6:54:01 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m6:54:17 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m6:56:09 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m6:56:34 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m6:57:35 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m6:57:35 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
+[2m6:59:35 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/SmartDecision.jsx, /src/index.css[22m
