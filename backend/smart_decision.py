@@ -98,7 +98,7 @@ def _build_pipeline_result(
                 f"variety ({price_result['feature_context'].get('variety', 'N/A')}), "
                 f"grade ({price_result['feature_context'].get('grade', 'N/A')}), "
                 f"arrival_date ({price_result['feature_context'].get('arrival_date', 'N/A')}). "
-                "These were passed through feature_scaler.pkl (StandardScaler) before model inference."
+                "These were passed through the shared production StandardScaler artifact before model inference."
             ),
         },
         "price_prediction": {
@@ -324,19 +324,19 @@ def _build_node_graph(
             "status": _status("FEATURE_PIPELINE"),
             "depends_on": _IDS[2],
             "data": {
-                "files": ["feature_columns.pkl", "feature_scaler.pkl", "label_encoders.pkl"],
+                "files": ["artifact_manifest.json", "feature_columns_*.joblib", "preprocessor_scaler_*.joblib", "preprocessor_encoder_*.joblib"],
                 "features": price_result["feature_context"] if fruit_detected else {},
                 "raw_prices": {"min": price_data["min_price"], "max": price_data["max_price"]},
             },
             "input": {
-                "files": ["feature_columns.pkl", "feature_scaler.pkl", "label_encoders.pkl"],
+                "files": ["artifact_manifest.json", "feature_columns_*.joblib", "preprocessor_scaler_*.joblib", "preprocessor_encoder_*.joblib"],
                 "raw_prices": {"min": price_data["min_price"], "max": price_data["max_price"]},
                 "crop_hint": crop_hint or "apple (default)",
             },
             "output": price_result["feature_context"] if fruit_detected else {},
             "error": "",
             "why": (
-                f"9 features assembled via feature_columns.pkl order: "
+                f"9 features assembled via the manifest-declared feature order: "
                 f"min_price={price_data['min_price']:,.0f}, max_price={price_data['max_price']:,.0f}, "
                 f"commodity='{price_result['feature_context'].get('commodity')}', "
                 f"state='{price_result['feature_context'].get('state')}', "
@@ -345,7 +345,7 @@ def _build_node_graph(
                 f"variety='{price_result['feature_context'].get('variety')}', "
                 f"grade='{price_result['feature_context'].get('grade')}', "
                 f"arrival_date='{price_result['feature_context'].get('arrival_date')}'. "
-                "All values scaled via StandardScaler (feature_scaler.pkl) before inference."
+                "All values scaled via the shared production StandardScaler artifact before inference."
             ) if fruit_detected else "Skipped — IMAGE_VALIDATION failed.",
         },
         {
@@ -356,14 +356,14 @@ def _build_node_graph(
             "depends_on": _IDS[3],
             "data": {
                 "active_model": price_result.get("model_used", "N/A"),
-                "available_models": ["crop_price_classifier.pkl", "ann_model.h5", "dnn_model.h5"],
+                "available_models": ["random_forest", "gradient_boosting", "ann", "dnn"],
                 "price_category": prediction_label,
                 "probabilities": price_result.get("probabilities", {}),
                 "confidence": price_result.get("confidence", 0.0),
                 "model_version": price_result.get("model_version", "N/A"),
             },
             "input": {
-                "models": ["crop_price_classifier.pkl", "ann_model.h5", "dnn_model.h5"],
+                "models": ["random_forest", "gradient_boosting", "ann", "dnn"],
                 "active_model": price_result.get("model_used", "N/A"),
                 "scaled_feature_vector": "9-dim float32",
             },

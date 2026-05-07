@@ -36,6 +36,7 @@ const MODELS = [
   { key: 'random_forest',     label: 'Random Forest',     color: '#4DA3FF' },
   { key: 'gradient_boosting', label: 'Gradient Boosting', color: '#F7B955' },
   { key: 'ann',               label: 'ANN',               color: '#2FAA65' },
+  { key: 'dnn',               label: 'DNN',               color: '#FF7A59' },
 ]
 
 const REC_COLOR = { SELL: 'text-green-400', HOLD: 'text-yellow-300' }
@@ -239,7 +240,7 @@ function ModelPerformance() {
                 <div className="text-center">
                   <motion.div className="mx-auto mb-3 h-9 w-9 rounded-full border-2 border-brand-neonCyan border-t-transparent"
                     animate={{ rotate: 360 }} transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1, ease: 'linear' }} />
-                  <p className="text-sm font-semibold text-brand-neonCyan">{tr('Calling all 3 models...')}</p>
+                  <p className="text-sm font-semibold text-brand-neonCyan">{tr('Calling all 4 models...')}</p>
                 </div>
               </div>
             )}
@@ -249,7 +250,7 @@ function ModelPerformance() {
               <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.24 }} className="space-y-4">
 
                 {/* Per-model cards */}
-                <div className="grid gap-3 md:grid-cols-3">
+                <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
                   {cmpResults.map(r => (
                     <div key={r.key} className="rounded-xl border border-border-soft bg-bg-cardHover/30 p-4 space-y-3">
                       <div className="flex items-center gap-2">
@@ -314,7 +315,7 @@ function ModelPerformance() {
 
             {!cmpRunning && cmpResults.length === 0 && !cmpError && (
               <div className="flex min-h-[100px] items-center justify-center rounded-xl border border-dashed border-border-soft bg-bg-cardHover/20">
-                <p className="text-sm text-text-muted">{tr('Enter a price range and click Compare to run all 3 models simultaneously.')}</p>
+                <p className="text-sm text-text-muted">{tr('Enter a price range and click Compare to run all 4 models simultaneously.')}</p>
               </div>
             )}
           </CardContent>

@@ -8,7 +8,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from config import settings
 from logger import get_logger
-from schemas import HealthResponse, ImagePredictResponse, ModelType, PredictRequest, PredictResponse, SmartDecisionResponse
+from schemas import (
+    ClustersResponse, HealthResponse, ImagePredictResponse, ModelMetricsResponse,
+    ModelType, PredictRequest, PredictResponse, SmartDecisionResponse,
+)
 import predict as predictor
 import predict_image as image_predictor
 import smart_decision as decision_engine
@@ -136,6 +139,22 @@ async def predict_image(file: UploadFile = File(..., description="Food image (JP
     except Exception as exc:
         log.exception("Unexpected image prediction error")
         raise HTTPException(status_code=500, detail="Image prediction failed.")
+
+
+@app.get("/model-metrics", response_model=ModelMetricsResponse)
+def model_metrics():
+    """Return notebook-confirmed accuracy metrics for all trained models."""
+    return {"metrics": predictor.get_model_metrics()}
+
+
+@app.get("/clusters", response_model=ClustersResponse)
+def clusters(n_samples: int = Query(default=120, ge=20, le=300)):
+    """Return real KMeans cluster assignments on a stratified sample."""
+    try:
+        return predictor.get_cluster_sample(n_samples)
+    except Exception as exc:
+        log.exception("Cluster sample failed")
+        raise HTTPException(status_code=500, detail="Cluster generation failed.")
 
 
 @app.post("/smart-decision", response_model=SmartDecisionResponse)

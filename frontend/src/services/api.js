@@ -90,6 +90,24 @@ export async function fetchPredictionWithModel(min_price, max_price, model_type)
   return response.json()
 }
 
+export async function fetchModelMetrics() {
+  const response = await fetch(`${BASE_URL}/model-metrics`)
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}))
+    throw new Error(error.detail || `Request failed with status ${response.status}`)
+  }
+  return response.json()
+}
+
+export async function fetchClusters(nSamples = 120) {
+  const response = await fetch(`${BASE_URL}/clusters?n_samples=${nSamples}`)
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}))
+    throw new Error(error.detail || `Request failed with status ${response.status}`)
+  }
+  return response.json()
+}
+
 export async function fetchVoiceHealth() {
   const response = await fetch(`${VOICE_BASE_URL}/health`)
 

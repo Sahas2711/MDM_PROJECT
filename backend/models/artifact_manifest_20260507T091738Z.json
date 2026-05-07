@@ -1,0 +1,51 @@
+{
+  "timestamp": "20260507T091738Z",
+  "default_model": "random_forest",
+  "labels": [
+    "Low",
+    "Medium",
+    "High"
+  ],
+  "preprocessing": {
+    "encoder_path": "preprocessor_encoder_20260507T091738Z.joblib",
+    "scaler_path": "preprocessor_scaler_20260507T091738Z.joblib",
+    "feature_columns_path": "feature_columns_20260507T091738Z.joblib",
+    "categorical_columns": [
+      "state",
+      "district",
+      "market",
+      "commodity",
+      "variety",
+      "grade",
+      "arrival_date"
+    ],
+    "numeric_columns": [
+      "min_price",
+      "max_price"
+    ]
+  },
+  "models": {
+    "random_forest": {
+      "kind": "sklearn",
+      "path": "crop_price_classifier_rf_20260507T091738Z.joblib"
+    },
+    "gradient_boosting": {
+      "kind": "sklearn",
+      "path": "crop_price_classifier_gb_20260507T091738Z.joblib"
+    },
+    "ann": {
+      "kind": "keras",
+      "path": "ann_model_20260507T091738Z.keras"
+    },
+    "dnn": {
+      "kind": "keras",
+      "path": "dnn_model_20260507T091738Z.keras"
+    }
+  },
+  "kmeans": {
+    "kind": "sklearn",
+    "path": "kmeans_clusterer_20260507T091738Z.joblib"
+  },
+  "metadata_path": "training_metadata_20260507T091738Z.json",
+  "metrics_path": "model_metrics_20260507T091738Z.json"
+}

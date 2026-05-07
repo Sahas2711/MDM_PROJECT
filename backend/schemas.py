@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field, model_validator
 
 from config import settings
 
-ModelType = Literal["random_forest", "ann", "dnn", "best"]
+ModelType = Literal["random_forest", "gradient_boosting", "ann", "dnn", "best"]
 
 
 class PredictRequest(BaseModel):
@@ -85,6 +85,26 @@ class ImagePredictResponse(BaseModel):
     image_reason: str | None = None
     fruit_detected: bool | None = None
     fruit_confidence: float | None = None
+
+
+class ClusterPoint(BaseModel):
+    cluster_id: int
+    min_price: float
+    max_price: float
+    modal_price: float
+    commodity: str
+    state: str
+
+
+class ClustersResponse(BaseModel):
+    clusters: list[ClusterPoint]
+    k: int
+    silhouette_score: float
+    note: str
+
+
+class ModelMetricsResponse(BaseModel):
+    metrics: list[dict]
 
 
 class HealthResponse(BaseModel):

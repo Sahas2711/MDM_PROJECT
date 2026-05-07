@@ -1,39 +1,26 @@
 import { motion } from 'framer-motion'
 import { Activity, Brain, CheckCircle, Cpu, TrendingUp, Zap } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import useTranslate from '../hooks/useTranslate'
 import {
-  Bar, BarChart, CartesianGrid, Cell, Line, LineChart,
+  Bar, BarChart, CartesianGrid, Cell,
   ResponsiveContainer, Tooltip, XAxis, YAxis,
 } from 'recharts'
-import { fetchPredictImage } from '../services/api'
+import { fetchPredictImage, fetchModelMetrics } from '../services/api'
 import AIAnalyzingOverlay from '../components/ux/AIAnalyzingOverlay'
 import useAiLoading from '../hooks/useAiLoading'
 import { cn } from '../lib/utils'
 
-const priceData = [
-  { day: 'Mon', min: 920,  max: 1410, modal: 1160 },
-  { day: 'Tue', min: 880,  max: 1360, modal: 1120 },
-  { day: 'Wed', min: 910,  max: 1470, modal: 1185 },
-  { day: 'Thu', min: 975,  max: 1525, modal: 1235 },
-  { day: 'Fri', min: 990,  max: 1600, modal: 1295 },
-  { day: 'Sat', min: 950,  max: 1490, modal: 1210 },
-]
-
-const modelAccuracy = [
-  { model: 'Random Forest', acc: 96.8, color: '#2FAA65' },
-  { model: 'Grad. Boost',   acc: 97.5, color: '#2DE2E6' },
-  { model: 'ANN',           acc: 98.2, color: '#4DA3FF' },
-  { model: 'DNN',           acc: 99.1, color: '#A78BFA' },
-  { model: 'SVM',           acc: 95.9, color: '#F59E0B' },
-]
-
-const statCards = [
-  { labelKey: 'Active Model',      value: 'Random Forest', subKey: 'Primary inference',  icon: Brain,      color: 'text-green-neon',  glow: 'glow-green' },
-  { labelKey: 'CNN Status',        value: 'Loaded',        subKey: 'Food quality model', icon: Cpu,        color: 'text-cyan-neon',   glow: 'glow-cyan'  },
-  { labelKey: 'Total Predictions', value: '—',             subKey: 'Session count',      icon: Activity,   color: 'text-blue-ai',     glow: ''           },
-  { labelKey: 'Avg Confidence',    value: '97.3%',         subKey: 'Last 10 calls',      icon: TrendingUp, color: 'text-green-neon',  glow: ''           },
-]
+const MODEL_COLORS = {
+  'Random Forest': '#2FAA65',
+  'Gradient Boosting': '#2DE2E6',
+  'ANN': '#4DA3FF',
+  'DNN': '#A78BFA',
+  'SVM': '#F59E0B',
+  'Logistic Regression': '#F97316',
+  'Decision Tree': '#EC4899',
+  'KNN': '#84CC16',
+}
 
 const ALLOWED = ['image/jpeg','image/png','image/webp','image/bmp']
 
@@ -88,6 +75,25 @@ export default function Dashboard() {
     catch (e) { setError(e.message || 'Scan failed.') }
     finally { setScanning(false) }
   }
+
+  const [metrics, setMetrics]         = useState([])
+  const [metricsLoading, setMetricsLoading] = useState(true)
+
+  useEffect(() => {
+    fetchModelMetrics()
+      .then(data => setMetrics(
+        data.metrics.map(m => ({ model: m.model, acc: m.accuracy, color: MODEL_COLORS[m.model] ?? '#4DA3FF' }))
+      ))
+      .catch(() => setMetrics([]))
+      .finally(() => setMetricsLoading(false))
+  }, [])
+
+  const statCards = [
+    { labelKey: 'Active Model',      value: 'Random Forest', subKey: 'Primary inference',  icon: Brain,    color: 'text-green-neon', glow: 'glow-green' },
+    { labelKey: 'CNN Status',        value: 'Loaded',        subKey: 'Food quality model', icon: Cpu,      color: 'text-cyan-neon',  glow: 'glow-cyan'  },
+    { labelKey: 'Total Predictions', value: '—',             subKey: 'Session count',      icon: Activity, color: 'text-blue-ai',    glow: ''           },
+    { labelKey: 'Best Model Acc',    value: metrics.length ? `${Math.max(...metrics.map(m => m.acc)).toFixed(2)}%` : '—', subKey: 'Notebook test accuracy', icon: TrendingUp, color: 'text-green-neon', glow: '' },
+  ]
 
   return (
     <div className="space-y-6">
@@ -227,42 +233,37 @@ export default function Dashboard() {
 
       {/* Charts row */}
       <div className="grid gap-6 xl:grid-cols-2">
-        {/* Price distribution */}
+        {/* Model accuracy — live from /model-metrics */}
         <motion.div initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }}
-          transition={{ duration:0.4, delay:0.35 }} className="glass rounded-2xl p-6">
-          <h2 className="text-sm font-semibold font-display text-text-primary mb-4">{tr('Price Distribution')}</h2>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={priceData} margin={{ top:8, right:8, left:-16, bottom:0 }}>
-                <CartesianGrid stroke="#1A3028" strokeDasharray="3 3" />
-                <XAxis dataKey="day" tick={{ fill:'#5A8A72', fontSize:11 }} axisLine={{ stroke:'#1A3028' }} tickLine={false} />
-                <YAxis tick={{ fill:'#5A8A72', fontSize:11 }} axisLine={{ stroke:'#1A3028' }} tickLine={false} />
-                <Tooltip contentStyle={tooltipStyle} />
-                <Line type="monotone" dataKey="min"   stroke="#F59E0B" strokeWidth={2} dot={false} name="Min" />
-                <Line type="monotone" dataKey="modal" stroke="#2DE2E6" strokeWidth={2.5} dot={false} name="Modal" />
-                <Line type="monotone" dataKey="max"   stroke="#2FAA65" strokeWidth={2} dot={false} name="Max" />
-              </LineChart>
-            </ResponsiveContainer>
+          transition={{ duration:0.4, delay:0.35 }} className="glass rounded-2xl p-6 xl:col-span-2">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-semibold font-display text-text-primary">{tr('Model Accuracy Comparison')}</h2>
+            <span className="text-xs text-text-muted">Source: notebook test set · Updated_MDM_crop_prices.ipynb</span>
           </div>
-        </motion.div>
-
-        {/* Model accuracy */}
-        <motion.div initial={{ opacity:0, y:16 }} animate={{ opacity:1, y:0 }}
-          transition={{ duration:0.4, delay:0.42 }} className="glass rounded-2xl p-6">
-          <h2 className="text-sm font-semibold font-display text-text-primary mb-4">{tr('Model Accuracy Comparison')}</h2>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={modelAccuracy} margin={{ top:8, right:8, left:-16, bottom:0 }}>
-                <CartesianGrid stroke="#1A3028" strokeDasharray="3 3" vertical={false} />
-                <XAxis dataKey="model" tick={{ fill:'#5A8A72', fontSize:10 }} axisLine={{ stroke:'#1A3028' }} tickLine={false} />
-                <YAxis domain={[94,100]} tick={{ fill:'#5A8A72', fontSize:11 }} axisLine={{ stroke:'#1A3028' }} tickLine={false} tickFormatter={v => `${v}%`} />
-                <Tooltip contentStyle={tooltipStyle} formatter={v => [`${v}%`, 'Accuracy']} />
-                <Bar dataKey="acc" radius={[6,6,0,0]}>
-                  {modelAccuracy.map(e => <Cell key={e.model} fill={e.color} fillOpacity={0.85} />)}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          {metricsLoading ? (
+            <div className="flex h-64 items-center justify-center">
+              <motion.div className="h-8 w-8 rounded-full border-2 border-green-neon border-t-transparent"
+                animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }} />
+            </div>
+          ) : metrics.length === 0 ? (
+            <div className="flex h-64 items-center justify-center">
+              <p className="text-sm text-text-muted">Could not load metrics — is the backend running?</p>
+            </div>
+          ) : (
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={metrics} margin={{ top:8, right:8, left:-16, bottom:0 }}>
+                  <CartesianGrid stroke="#1A3028" strokeDasharray="3 3" vertical={false} />
+                  <XAxis dataKey="model" tick={{ fill:'#5A8A72', fontSize:10 }} axisLine={{ stroke:'#1A3028' }} tickLine={false} />
+                  <YAxis domain={[60, 100]} tick={{ fill:'#5A8A72', fontSize:11 }} axisLine={{ stroke:'#1A3028' }} tickLine={false} tickFormatter={v => `${v}%`} />
+                  <Tooltip contentStyle={tooltipStyle} formatter={v => [`${v}%`, 'Test Accuracy']} />
+                  <Bar dataKey="acc" radius={[6,6,0,0]}>
+                    {metrics.map(e => <Cell key={e.model} fill={e.color} fillOpacity={0.85} />)}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          )}
         </motion.div>
       </div>
     </div>
