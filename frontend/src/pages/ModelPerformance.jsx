@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   Bar, BarChart, CartesianGrid, Cell,
   ResponsiveContainer, Tooltip, XAxis, YAxis,
@@ -11,41 +11,49 @@ import AIAnalyzingOverlay from '../components/ux/AIAnalyzingOverlay'
 import ExplainabilityPanel from '../components/ux/ExplainabilityPanel'
 import useAiLoading from '../hooks/useAiLoading'
 import useTranslate from '../hooks/useTranslate'
-import { fetchPredictionWithModel, fetchPredictImage } from '../services/api'
+import { fetchPredictionWithModel, fetchPredictImage, fetchModelMetrics } from '../services/api'
 import { cn } from '../lib/utils'
-
-// ── Static benchmark data ─────────────────────────────────────────────────────
-const modelData = [
-  { model: 'Random Forest',     accuracy: 96.8 },
-  { model: 'Gradient Boosting', accuracy: 97.5 },
-  { model: 'ANN',               accuracy: 98.2 },
-  { model: 'DNN',               accuracy: 99.1 },
-  { model: 'SVM',               accuracy: 95.9 },
-]
-
-const bestModel = modelData.reduce((b, c) => c.accuracy > b.accuracy ? c : b)
-
-const insightPoints = [
-  'DNN leads in accuracy and consistency across validation folds, making it the primary inference model.',
-  'ANN and Gradient Boosting remain strong fallback candidates for faster retraining windows.',
-  'SVM and Random Forest show robust baseline performance but lower headroom on non-linear price-demand interactions.',
-]
 
 // ── Live comparison config ────────────────────────────────────────────────────
 const MODELS = [
   { key: 'random_forest',     label: 'Random Forest',     color: '#4DA3FF' },
   { key: 'gradient_boosting', label: 'Gradient Boosting', color: '#F7B955' },
   { key: 'ann',               label: 'ANN',               color: '#2FAA65' },
-  { key: 'dnn',               label: 'DNN',               color: '#FF7A59' },
+  { key: 'dnn',               label: 'DNN',               color: '#A78BFA' },
 ]
 
+const MODEL_COLORS = { random_forest:'#4DA3FF', gradient_boosting:'#F7B955', ann:'#2FAA65', dnn:'#A78BFA' }
 const REC_COLOR = { SELL: 'text-green-400', HOLD: 'text-yellow-300' }
-
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/bmp']
 
 function ModelPerformance() {
   const tr = useTranslate()
   const loading = useAiLoading(820)
+
+  // ── Live metrics from /model-metrics ─────────────────────────────────────
+  const [metrics, setMetrics]           = useState([])
+  const [metricsLoading, setMetricsLoading] = useState(true)
+
+  useEffect(() => {
+    fetchModelMetrics()
+      .then(d => setMetrics(d.metrics || []))
+      .catch(() => setMetrics([]))
+      .finally(() => setMetricsLoading(false))
+  }, [])
+
+  const metricsChartData = metrics
+    .map(m => ({
+      model: m.model.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+      accuracy: m.cv_accuracy_mean != null
+        ? +(m.cv_accuracy_mean * 100).toFixed(2)
+        : m.macro_f1 != null ? +(m.macro_f1 * 100).toFixed(2) : null,
+      color: MODEL_COLORS[m.model] ?? '#4DA3FF',
+    }))
+    .filter(m => m.accuracy != null)
+
+  const bestModel = metricsChartData.length
+    ? metricsChartData.reduce((b, c) => c.accuracy > b.accuracy ? c : b)
+    : { model: '—', accuracy: 0 }
 
   // ── Model comparison state ──────────────────────────────────────────────────
   const [cmpMin, setCmpMin]         = useState('')
@@ -115,7 +123,7 @@ function ModelPerformance() {
   }
 
   // Chart data from live comparison results
-  const chartData = cmpResults
+  const cmpChartData = cmpResults
     .filter(r => r.confidence !== null)
     .map(r => ({ model: r.label, confidence: +(r.confidence * 100).toFixed(1), color: r.color }))
 
@@ -136,19 +144,29 @@ function ModelPerformance() {
             <CardTitle>{tr('Model Accuracy Benchmark')}</CardTitle>
           </CardHeader>
           <CardContent className="h-80">
+            {metricsLoading ? (
+              <div className="flex h-full items-center justify-center">
+                <p className="text-sm text-text-muted">Loading metrics...</p>
+              </div>
+            ) : metricsChartData.length === 0 ? (
+              <div className="flex h-full items-center justify-center">
+                <p className="text-sm text-text-muted">Backend unavailable — start the server to see live metrics.</p>
+              </div>
+            ) : (
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={modelData} margin={{ top: 10, right: 12, left: -8, bottom: 4 }}>
+              <BarChart data={metricsChartData} margin={{ top: 10, right: 12, left: -8, bottom: 4 }}>
                 <CartesianGrid stroke="#22314D" strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="model" tick={{ fill: '#9AB1D3', fontSize: 12 }} axisLine={{ stroke: '#30456B' }} tickLine={false} interval={0} angle={-12} textAnchor="end" height={56} />
-                <YAxis domain={[94, 100]} tick={{ fill: '#9AB1D3', fontSize: 12 }} axisLine={{ stroke: '#30456B' }} tickLine={false} tickFormatter={v => `${v}%`} />
+                <YAxis domain={[0, 100]} tick={{ fill: '#9AB1D3', fontSize: 12 }} axisLine={{ stroke: '#30456B' }} tickLine={false} tickFormatter={v => `${v}%`} />
                 <Tooltip formatter={v => [`${v}%`, 'Accuracy']} contentStyle={{ background: '#0B1220', border: '1px solid #30456B', borderRadius: '12px', color: '#EAF2FF' }} />
                 <Bar dataKey="accuracy" radius={[8, 8, 0, 0]}>
-                  {modelData.map(entry => (
-                    <Cell key={entry.model} fill={entry.model === bestModel.model ? '#2FAA65' : '#4DA3FF'} fillOpacity={entry.model === bestModel.model ? 1 : 0.7} />
+                  {metricsChartData.map(entry => (
+                    <Cell key={entry.model} fill={entry.color} fillOpacity={entry.model === bestModel.model ? 1 : 0.7} />
                   ))}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
+            )}
           </CardContent>
         </Card>
 
@@ -290,18 +308,18 @@ function ModelPerformance() {
                 </div>
 
                 {/* Comparison bar chart */}
-                {chartData.length > 0 && (
+                {cmpChartData.length > 0 && (
                   <div>
                     <p className="mb-3 text-xs font-semibold uppercase tracking-[0.08em] text-text-muted">{tr('Confidence Comparison Chart')}</p>
                     <div className="h-52">
                       <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={chartData} margin={{ top: 8, right: 12, left: -8, bottom: 4 }}>
+                        <BarChart data={cmpChartData} margin={{ top: 8, right: 12, left: -8, bottom: 4 }}>
                           <CartesianGrid stroke="#22314D" strokeDasharray="3 3" vertical={false} />
                           <XAxis dataKey="model" tick={{ fill: '#9AB1D3', fontSize: 12 }} axisLine={{ stroke: '#30456B' }} tickLine={false} />
                           <YAxis domain={[0, 100]} tick={{ fill: '#9AB1D3', fontSize: 12 }} axisLine={{ stroke: '#30456B' }} tickLine={false} tickFormatter={v => `${v}%`} />
                           <Tooltip formatter={v => [`${v}%`, 'Confidence']} contentStyle={{ background: '#0B1220', border: '1px solid #30456B', borderRadius: '12px', color: '#EAF2FF' }} />
                           <Bar dataKey="confidence" radius={[8, 8, 0, 0]}>
-                            {chartData.map(entry => (
+                            {cmpChartData.map(entry => (
                               <Cell key={entry.model} fill={entry.color} />
                             ))}
                           </Bar>

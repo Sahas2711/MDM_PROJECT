@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import {
   CartesianGrid,
   Cell,
@@ -21,6 +22,7 @@ import AIAnalyzingOverlay from '../components/ux/AIAnalyzingOverlay'
 import ExplainabilityPanel from '../components/ux/ExplainabilityPanel'
 import useAiLoading from '../hooks/useAiLoading'
 import useTranslate from '../hooks/useTranslate'
+import { fetchClusters } from '../services/api'
 
 const clusterMeta = {
   lowPrice: {
@@ -57,38 +59,6 @@ const clusterMeta = {
   },
 }
 
-const lowPriceData = [
-  { x: 18, y: 1420, market: 'MKT-L1' },
-  { x: 21, y: 1510, market: 'MKT-L2' },
-  { x: 25, y: 1460, market: 'MKT-L3' },
-  { x: 28, y: 1550, market: 'MKT-L4' },
-  { x: 20, y: 1495, market: 'MKT-L5' },
-]
-
-const stableData = [
-  { x: 43, y: 1890, market: 'MKT-S1' },
-  { x: 47, y: 1940, market: 'MKT-S2' },
-  { x: 52, y: 1995, market: 'MKT-S3' },
-  { x: 49, y: 2010, market: 'MKT-S4' },
-  { x: 44, y: 1925, market: 'MKT-S5' },
-]
-
-const highDemandData = [
-  { x: 69, y: 2360, market: 'MKT-H1' },
-  { x: 76, y: 2475, market: 'MKT-H2' },
-  { x: 72, y: 2520, market: 'MKT-H3' },
-  { x: 81, y: 2590, market: 'MKT-H4' },
-  { x: 73, y: 2415, market: 'MKT-H5' },
-]
-
-const volatileData = [
-  { x: 56, y: 1885, market: 'MKT-V1' },
-  { x: 66, y: 2310, market: 'MKT-V2' },
-  { x: 62, y: 2060, market: 'MKT-V3' },
-  { x: 58, y: 2250, market: 'MKT-V4' },
-  { x: 64, y: 1975, market: 'MKT-V5' },
-]
-
 const clusterOrder = [
   clusterMeta.lowPrice,
   clusterMeta.stable,
@@ -97,9 +67,7 @@ const clusterOrder = [
 ]
 
 function CustomTooltip({ active, payload }) {
-  if (!active || !payload || payload.length === 0) {
-    return null
-  }
+  if (!active || !payload || payload.length === 0) return null
 
   const point = payload[0].payload
 
@@ -115,10 +83,29 @@ function CustomTooltip({ active, payload }) {
 function MarketIntelligence() {
   const tr = useTranslate()
   const loading = useAiLoading(900)
+  const [clusters, setClusters] = useState([])
+  const [clustersLoading, setClustersLoading] = useState(true)
+
+  useEffect(() => {
+    fetchClusters(120)
+      .then(d => setClusters(d.clusters || []))
+      .catch(() => setClusters([]))
+      .finally(() => setClustersLoading(false))
+  }, [])
+
+  const CLUSTER_COLORS = ['#FF7A45', '#4DA3FF', '#2FAA65', '#F7B955', '#A78BFA']
+
+  const grouped = clusters.reduce((acc, pt) => {
+    const id = pt.cluster_id
+    if (!acc[id]) acc[id] = []
+    acc[id].push({ x: pt.modal_price, y: pt.max_price, market: pt.commodity })
+    return acc
+  }, {})
 
   return (
-    <div className="space-y-5">
+    <>
       <AIAnalyzingOverlay loading={loading} />
+
       <motion.section
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -129,52 +116,54 @@ function MarketIntelligence() {
             <CardDescription>{tr('Cluster Scatter Visualization')}</CardDescription>
             <CardTitle>{tr('Market Segmentation by Demand vs Modal Price')}</CardTitle>
           </CardHeader>
+
           <CardContent className="h-[390px]">
-            <ResponsiveContainer width="100%" height="100%">
-              <ScatterChart margin={{ top: 16, right: 10, bottom: 8, left: -10 }}>
-                <CartesianGrid stroke="#22314D" strokeDasharray="3 3" />
-                <XAxis
-                  type="number"
-                  dataKey="x"
-                  name="Demand Index"
-                  domain={[10, 90]}
-                  tick={{ fill: '#9AB1D3', fontSize: 12 }}
-                  axisLine={{ stroke: '#30456B' }}
-                  tickLine={false}
-                />
-                <YAxis
-                  type="number"
-                  dataKey="y"
-                  name="Modal Price"
-                  domain={[1300, 2700]}
-                  tick={{ fill: '#9AB1D3', fontSize: 12 }}
-                  axisLine={{ stroke: '#30456B' }}
-                  tickLine={false}
-                />
-                <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#30456B', strokeDasharray: '4 4' }} />
-                <Legend wrapperStyle={{ color: '#B4C0D9', fontSize: '12px', paddingTop: '8px' }} />
-                <Scatter name="Low Price" data={lowPriceData} fill={clusterMeta.lowPrice.color}>
-                  {lowPriceData.map((item) => (
-                    <Cell key={item.market} fill={clusterMeta.lowPrice.color} fillOpacity={0.9} />
+            {clustersLoading ? (
+              <div className="flex h-[390px] items-center justify-center">
+                <p className="text-sm text-text-muted">Loading cluster data...</p>
+              </div>
+            ) : clusters.length === 0 ? (
+              <div className="flex h-[390px] items-center justify-center">
+                <p className="text-sm text-text-muted">Backend unavailable — start the server to see live clusters.</p>
+              </div>
+            ) : (
+              <ResponsiveContainer width="100%" height="100%">
+                <ScatterChart margin={{ top: 16, right: 10, bottom: 8, left: -10 }}>
+                  <CartesianGrid stroke="#22314D" strokeDasharray="3 3" />
+                  <XAxis
+                    type="number"
+                    dataKey="x"
+                    name="Modal Price"
+                    tick={{ fill: '#9AB1D3', fontSize: 12 }}
+                    axisLine={{ stroke: '#30456B' }}
+                    tickLine={false}
+                  />
+                  <YAxis
+                    type="number"
+                    dataKey="y"
+                    name="Max Price"
+                    tick={{ fill: '#9AB1D3', fontSize: 12 }}
+                    axisLine={{ stroke: '#30456B' }}
+                    tickLine={false}
+                  />
+                  <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#30456B', strokeDasharray: '4 4' }} />
+                  <Legend wrapperStyle={{ color: '#B4C0D9', fontSize: '12px', paddingTop: '8px' }} />
+
+                  {Object.entries(grouped).map(([id, pts]) => (
+                    <Scatter
+                      key={id}
+                      name={`Cluster ${id}`}
+                      data={pts}
+                      fill={CLUSTER_COLORS[id % CLUSTER_COLORS.length]}
+                    >
+                      {pts.map((pt, i) => (
+                        <Cell key={i} fill={CLUSTER_COLORS[id % CLUSTER_COLORS.length]} fillOpacity={0.85} />
+                      ))}
+                    </Scatter>
                   ))}
-                </Scatter>
-                <Scatter name="Stable" data={stableData} fill={clusterMeta.stable.color}>
-                  {stableData.map((item) => (
-                    <Cell key={item.market} fill={clusterMeta.stable.color} fillOpacity={0.9} />
-                  ))}
-                </Scatter>
-                <Scatter name="High Demand" data={highDemandData} fill={clusterMeta.highDemand.color}>
-                  {highDemandData.map((item) => (
-                    <Cell key={item.market} fill={clusterMeta.highDemand.color} fillOpacity={0.9} />
-                  ))}
-                </Scatter>
-                <Scatter name="Volatile" data={volatileData} fill={clusterMeta.volatile.color}>
-                  {volatileData.map((item) => (
-                    <Cell key={item.market} fill={clusterMeta.volatile.color} fillOpacity={0.9} />
-                  ))}
-                </Scatter>
-              </ScatterChart>
-            </ResponsiveContainer>
+                </ScatterChart>
+              </ResponsiveContainer>
+            )}
           </CardContent>
         </Card>
       </motion.section>
@@ -191,7 +180,7 @@ function MarketIntelligence() {
             <CardTitle>{tr('4 Market Clusters')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            {clusterOrder.map((cluster) => (
+            {clusterOrder.map(cluster => (
               <div key={cluster.id} className="interactive-tile rounded-xl border border-border-soft bg-bg-cardHover/30 p-3.5">
                 <div className="flex items-center gap-2">
                   <span
@@ -212,7 +201,7 @@ function MarketIntelligence() {
             <CardTitle>{tr('Cluster-Level Interpretation')}</CardTitle>
           </CardHeader>
           <CardContent className="grid gap-3 md:grid-cols-2">
-            {clusterOrder.map((cluster) => (
+            {clusterOrder.map(cluster => (
               <div
                 key={cluster.id}
                 className="interactive-tile rounded-xl border p-4"
@@ -225,15 +214,16 @@ function MarketIntelligence() {
                 <p className="mt-2 text-sm leading-6 text-text-secondary">{cluster.note}</p>
               </div>
             ))}
+
             <div className="rounded-xl border border-brand-neonCyan/35 bg-brand-neonCyan/10 p-4 md:col-span-2">
               <p className="text-xs font-semibold uppercase tracking-[0.08em] text-brand-neonCyan">
                 {tr('ML Depth')}
               </p>
               <p className="mt-2 text-sm leading-6 text-text-secondary">
-                Clusters are derived from a feature space combining demand index, modal price, and
-                intraday spread variability. This segmentation supports policy-level actions: margin
-                optimization in high-demand groups, risk control in volatile groups, and volume
-                strategies in low-price groups.
+                Clusters are derived from a feature space combining demand index, modal price,
+                and intraday spread variability. This segmentation supports policy-level actions:
+                margin optimization in high-demand groups, risk control in volatile groups,
+                and volume strategies in low-price groups.
               </p>
             </div>
           </CardContent>
@@ -247,7 +237,7 @@ function MarketIntelligence() {
           'High-demand cluster concentration is a leading signal for premium margin opportunities.',
         ]}
       />
-    </div>
+    </>
   )
 }
 

@@ -165,3 +165,22 @@ export async function fetchVoiceSynthesis(text) {
 
   return response.json()
 }
+
+export async function fetchAnalytics() {
+  const r = await fetch(`${BASE_URL}/analytics`)
+  if (!r.ok) throw new Error(`Analytics failed: ${r.status}`)
+  return r.json()
+}
+
+export async function fetchCropRecommendation(season, budget, soilType) {
+  const r = await fetch(`${BASE_URL}/crop-recommendation`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ season, budget, soil_type: soilType }),
+  })
+  if (!r.ok) {
+    const err = await r.json().catch(() => ({}))
+    throw new Error(err.detail || `Request failed: ${r.status}`)
+  }
+  return r.json()
+}
