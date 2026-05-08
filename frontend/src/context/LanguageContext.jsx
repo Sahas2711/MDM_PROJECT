@@ -14,7 +14,6 @@ export const TRANSLATIONS = {
   'Core':                    { hi: 'मुख्य',                    mr: 'मुख्य' },
   'Analysis':                { hi: 'विश्लेषण',                 mr: 'विश्लेषण' },
   'AI':                      { hi: 'एआई',                      mr: 'एआय' },
-  'Dashboard':               { hi: 'डैशबोर्ड',                 mr: 'डॅशबोर्ड' },
   'Smart Decision':          { hi: 'स्मार्ट निर्णय',           mr: 'स्मार्ट निर्णय' },
   'Sell Timing':             { hi: 'बेचने का समय',             mr: 'विक्री वेळ' },
   'Market Intelligence':     { hi: 'बाजार बुद्धिमत्ता',        mr: 'बाजार बुद्धिमत्ता' },

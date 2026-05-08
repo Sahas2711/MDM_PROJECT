@@ -5,9 +5,10 @@ from app.config import settings
 from app.errors import ProviderConfigError, ProviderRequestError, VoiceAssistantError
 from app.logger import get_logger
 from app.providers.base import BaseLLMProvider, BaseSTTProvider, BaseTTSProvider
-from app.providers.llm import OpenAICompatibleLLMProvider, OpenRouterLLMProvider
+from app.providers.llm import GroqLLMProvider, OpenAICompatibleLLMProvider, OpenRouterLLMProvider
 from app.providers.stt import GroqWhisperSTTProvider, OpenAICompatibleSTTProvider
 from app.providers.tts import HttpTTSProvider, HuggingFaceTTSProvider
+from app.providers.simple_tts import SimpleTTSProvider
 
 log = get_logger(__name__)
 
@@ -36,6 +37,8 @@ class ProviderFactory:
 
     @staticmethod
     def create_llm(provider_name: str) -> BaseLLMProvider:
+        if provider_name == "groq":
+            return GroqLLMProvider()
         if provider_name == "openrouter":
             return OpenRouterLLMProvider()
         if provider_name == "openai_compatible":
@@ -48,6 +51,8 @@ class ProviderFactory:
             return HuggingFaceTTSProvider()
         if provider_name == "http":
             return HttpTTSProvider()
+        if provider_name == "simple_tts":
+            return SimpleTTSProvider()
         raise ProviderConfigError(f"Unsupported TTS provider '{provider_name}'.")
 
 
@@ -56,7 +61,7 @@ class VoiceAssistantOrchestrator:
         warnings: list[str] = []
         try:
             provider = ProviderFactory.create_stt(settings.stt_provider)
-            log.info("Starting transcription", extra={"provider": provider.provider_name, "filename": filename})
+            log.info("Starting transcription", extra={"provider": provider.provider_name, "audio_file": filename})
             text = await provider.transcribe(audio_bytes=audio_bytes, filename=filename, content_type=content_type)
             log.info("Transcription complete", extra={"provider": provider.provider_name, "text_length": len(text)})
             return text, provider.provider_name, warnings
@@ -103,16 +108,26 @@ class VoiceAssistantOrchestrator:
             audio_bytes, mime_type = await provider.synthesize(text)
             return audio_bytes, mime_type, provider.provider_name, provider.model_name, warnings
         except ProviderRequestError as exc:
-            if exc.code != "provider_rate_limit" or settings.tts_fallback_provider == "none":
-                raise
-            warnings.append("Primary TTS limit hit. Fallback speech provider was used.")
+            if settings.tts_fallback_provider == "none":
+                warnings.append("Speech generation failed. Text reply is still available.")
+                return b"", "audio/wav", "none", "text-only", warnings
+            warning_message = (
+                "Primary TTS limit hit. Fallback speech provider was used."
+                if exc.code == "provider_rate_limit"
+                else "Primary TTS provider failed. Fallback speech provider was used."
+            )
+            warnings.append(warning_message)
             fallback = ProviderFactory.create_tts(settings.tts_fallback_provider)
             log.warning(
                 "Primary TTS failed, using fallback",
-                extra={"primary": settings.tts_provider, "fallback": fallback.provider_name},
+                extra={"primary": settings.tts_provider, "fallback": fallback.provider_name, "error_code": exc.code},
             )
-            audio_bytes, mime_type = await fallback.synthesize(text)
-            return audio_bytes, mime_type, fallback.provider_name, fallback.model_name, warnings
+            try:
+                audio_bytes, mime_type = await fallback.synthesize(text)
+                return audio_bytes, mime_type, fallback.provider_name, fallback.model_name, warnings
+            except ProviderRequestError:
+                warnings.append("Fallback TTS also failed. Returning text-only response.")
+                return b"", "audio/wav", "none", "text-only", warnings
 
     async def voice_chat(self, audio_bytes: bytes, filename: str, content_type: str) -> VoiceChatResult:
         warnings: list[str] = []

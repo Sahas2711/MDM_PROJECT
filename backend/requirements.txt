@@ -16,3 +16,7 @@ slowapi>=0.1.9
 python-jose[cryptography]>=3.3.0
 passlib[bcrypt]>=1.7.4
 pandas>=2.0.0
+torch>=2.0.0
+torchvision>=0.15.0
+basicsr>=1.4.2
+realesrgan>=0.3.0

@@ -181,7 +181,7 @@ def _predict_fruit_domain(image: Image.Image) -> dict:
     }
 
 
-def predict_image(image_bytes: bytes) -> dict:
+def predict_image(image_bytes: bytes, enhancement_meta: dict | None = None) -> dict:
     t0 = time.perf_counter()
 
     with _lock:
@@ -200,6 +200,13 @@ def predict_image(image_bytes: bytes) -> dict:
             "model_version": freshness_version,
             "latency_ms": latency_ms,
             "image_reason": "The image failed the fruit check, so freshness analysis was not run.",
+            "preprocessing": {
+                "original_size": list(image.size),
+                "resized_to": list(FRESHNESS_IMG_SIZE),
+                "normalized": True,
+                "decoder": "cv2",
+                "enhancement": enhancement_meta or {"enhanced": False, "reason": "not_requested"},
+            },
             **fruit_result,
         }
 
@@ -226,13 +233,14 @@ def predict_image(image_bytes: bytes) -> dict:
             "resized_to": list(FRESHNESS_IMG_SIZE),
             "normalized": True,
             "decoder": "cv2",
+            "enhancement": enhancement_meta or {"enhanced": False, "reason": "not_requested"},
         },
         **fruit_result,
     }
 
 
-def analyze_image(image_bytes: bytes) -> dict:
-    return predict_image(image_bytes)
+def analyze_image(image_bytes: bytes, enhancement_meta: dict | None = None) -> dict:
+    return predict_image(image_bytes, enhancement_meta=enhancement_meta)
 
 
 def cnn_info() -> dict | None:

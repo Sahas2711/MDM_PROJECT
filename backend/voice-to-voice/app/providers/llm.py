@@ -76,6 +76,57 @@ class OpenRouterLLMProvider(BaseLLMProvider):
             raise ProviderRequestError("Unexpected LLM provider error.") from exc
 
 
+class GroqLLMProvider(BaseLLMProvider):
+    provider_name = "groq"
+
+    def __init__(self) -> None:
+        if not settings.groq_api_key:
+            raise ProviderConfigError("GROQ_API_KEY is missing for LLM generation.")
+        self.model_name = settings.llm_model
+
+    async def generate(self, user_text: str) -> tuple[str, str | None]:
+        headers = {
+            "Authorization": f"Bearer {settings.groq_api_key}",
+            "Content-Type": "application/json",
+        }
+        payload = {
+            "model": self.model_name,
+            "temperature": settings.llm_temperature,
+            "max_tokens": settings.llm_max_tokens,
+            "messages": [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": user_text},
+            ],
+        }
+
+        try:
+            async with httpx.AsyncClient(timeout=settings.request_timeout_seconds) as client:
+                response = await client.post(
+                    f"{settings.groq_base_url.rstrip('/')}/chat/completions",
+                    headers=headers,
+                    json=payload,
+                )
+            response.raise_for_status()
+            content = extract_chat_content(response.json())
+            if not content:
+                raise ProviderRequestError("Groq returned an empty answer.", status_code=502)
+            return content, None
+        except httpx.TimeoutException as exc:
+            raise ProviderRequestError("Groq LLM timed out.", status_code=504, code="provider_timeout") from exc
+        except httpx.HTTPStatusError as exc:
+            status_code = 429 if exc.response.status_code == 429 else 502
+            code = "provider_rate_limit" if exc.response.status_code == 429 else "provider_failure"
+            raise ProviderRequestError(
+                f"Groq generation failed with status {exc.response.status_code}.",
+                status_code=status_code,
+                code=code,
+            ) from exc
+        except ProviderRequestError:
+            raise
+        except Exception as exc:
+            raise ProviderRequestError("Unexpected Groq LLM provider error.") from exc
+
+
 class OpenAICompatibleLLMProvider(BaseLLMProvider):
     provider_name = "openai_compatible"
 

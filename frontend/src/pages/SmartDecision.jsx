@@ -501,7 +501,7 @@ function buildKeyReasons(result) {
 
 function SummaryStat({ label, value, accent = 'default', subvalue }) {
   const accentClass = {
-    default: 'border-white/10 bg-white/[0.03] text-text-primary',
+    default: 'border-border-soft bg-bg-cardHover/30 text-text-primary',
     success: 'border-green-500/30 bg-green-500/10 text-green-300',
     warning: 'border-yellow-400/30 bg-yellow-400/10 text-yellow-200',
     danger: 'border-red-500/30 bg-red-500/10 text-red-300',
@@ -580,6 +580,7 @@ function SmartDecision() {
   const [imageFile, setImageFile] = useState(null)
   const [preview, setPreview] = useState(null)
   const [cropHint, setCropHint] = useState('')
+  const [enableEnhancement, setEnableEnhancement] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [step, setStep] = useState(0)
   const [result, setResult] = useState(null)
@@ -611,7 +612,7 @@ function SmartDecision() {
     const stepTimer = setInterval(() => setStep((s) => Math.min(s + 1, FULL_PIPELINE_NODES.length)), 1700)
 
     try {
-      const data = await fetchSmartDecision(imageFile, cropHint)
+      const data = await fetchSmartDecision(imageFile, cropHint, enableEnhancement)
       setResult(data)
     } catch (err) {
       setError(err.message || 'Request failed. Is the backend running?')
@@ -629,6 +630,7 @@ function SmartDecision() {
   const keyReasons = result ? buildKeyReasons(result) : []
   const marketTrend = result ? getMarketTrend(result) : 'Contextual'
   const topFeatureContributions = result?.feature_contributions?.slice(0, 5) ?? []
+  const enhancementMeta = result?.node_graph?.nodes?.[0]?.output?.enhancement ?? null
 
   return (
     <div className="space-y-5">
@@ -641,7 +643,7 @@ function SmartDecision() {
             <CardTitle>{tr('Smart Crop Decision Engine')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-1">
               <div className="space-y-2">
                 <span className="text-xs font-semibold uppercase tracking-[0.08em] text-text-muted">{tr('Crop Image')}</span>
                 <div
@@ -660,19 +662,27 @@ function SmartDecision() {
                 </div>
                 <input ref={fileRef} type="file" accept="image/jpeg,image/png,image/webp,image/bmp" className="hidden" onChange={handleFile} />
               </div>
-
-              <div className="space-y-2">
-                <span className="text-xs font-semibold uppercase tracking-[0.08em] text-text-muted">{tr('Crop Name Hint')}</span>
-                <input
-                  type="text"
-                  value={cropHint}
-                  onChange={(e) => setCropHint(e.target.value)}
-                  placeholder="e.g. apple, mango, tomato, onion"
-                  className="h-11 w-full rounded-xl border border-border-soft bg-bg-cardHover px-3 text-sm text-text-primary outline-none transition focus:border-brand-neonCyan"
-                />
-                <p className="text-xs text-text-muted">{tr('Used for commodity encoding, web price lookup, and result explanations.')}</p>
-              </div>
             </div>
+
+            {/* Real-ESRGAN toggle */}
+            <button
+              type="button"
+              onClick={() => setEnableEnhancement((v) => !v)}
+              className={cn(
+                'inline-flex h-10 w-fit items-center gap-3 rounded-xl border px-4 text-sm font-semibold transition',
+                enableEnhancement
+                  ? 'border-brand-neonCyan/60 bg-brand-neonCyan/10 text-brand-neonCyan'
+                  : 'border-border-soft bg-bg-cardHover text-text-muted hover:border-brand-neonCyan/40',
+              )}
+            >
+              <span className={cn('relative inline-flex h-4 w-8 shrink-0 rounded-full transition-colors', enableEnhancement ? 'bg-brand-neonCyan' : 'bg-border-strong')}>
+                <span className={cn('absolute top-0 h-4 w-4 rounded-full bg-white shadow transition-transform duration-200', enableEnhancement ? 'translate-x-4' : 'translate-x-0')} />
+              </span>
+              Real-ESRGAN Enhancement
+              <span className={cn('rounded-full border px-2 py-0.5 text-[10px] font-bold', enableEnhancement ? 'border-brand-neonCyan/40 text-brand-neonCyan' : 'border-border-soft text-text-muted')}>
+                {enableEnhancement ? 'ON' : 'OFF'}
+              </span>
+            </button>
 
             <div className="flex items-center gap-4">
               <button
@@ -732,12 +742,37 @@ function SmartDecision() {
               </div>
             ) : result ? (
               <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.24 }} className="space-y-4">
-                <section className="overflow-hidden rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(34,197,94,0.16),transparent_35%),radial-gradient(circle_at_top_right,rgba(34,211,238,0.14),transparent_30%),linear-gradient(180deg,rgba(7,18,14,0.98),rgba(5,10,16,0.98))] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.28)]">
+                <section className="theme-panel overflow-hidden rounded-[28px] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.18)]">
                   <SectionHeader
                     eyebrow="AI Decision Summary"
                     title={tr('Executive decision snapshot')}
                     description={tr('Fast read for operators: what the model saw, what it predicts, and how the market context shifts the recommendation.')}
                   />
+                  {enhancementMeta && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={cn(
+                        'mb-4 flex flex-wrap items-center gap-3 rounded-2xl border px-4 py-3 text-sm',
+                        enhancementMeta.enhanced
+                          ? 'border-brand-neonCyan/30 bg-brand-neonCyan/8 text-brand-neonCyan'
+                          : 'border-border-soft bg-bg-cardHover/30 text-text-muted',
+                      )}
+                    >
+                      <span className="font-semibold">
+                        {enhancementMeta.enhanced ? '✦ Real-ESRGAN Enhanced' : `Enhancement: ${enhancementMeta.reason ?? 'off'}`}
+                      </span>
+                      {enhancementMeta.original_size && (
+                        <span className="text-xs opacity-70">
+                          {enhancementMeta.original_size[0]}×{enhancementMeta.original_size[1]}
+                          {enhancementMeta.enhanced && enhancementMeta.enhanced_size
+                            ? ` → ${enhancementMeta.enhanced_size[0]}×${enhancementMeta.enhanced_size[1]}`
+                            : ''}
+                        </span>
+                      )}
+                    </motion.div>
+                  )}
+
                   <div className="grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
                     <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
                       <SummaryStat label={tr('Fruit detected')} value={result.fruit_detected ? tr('Detected') : tr('Uncertain')} accent={result.fruit_detected ? 'success' : 'warning'} subvalue={`${fruitPct}% ${tr('vision confidence')}`} />
@@ -751,21 +786,21 @@ function SmartDecision() {
                     </div>
 
                     {preview && (
-                      <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-black/40">
+                      <div className="relative overflow-hidden rounded-[24px] border border-border-soft bg-bg-cardHover/50">
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                        <div className="absolute inset-x-0 top-0 flex items-center justify-between px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/70">
+                        <div className="absolute inset-x-0 top-0 flex items-center justify-between px-4 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-text-muted">
                           <span>{tr('AI Crop Analysis')}</span>
                           <span>{result.feature_context?.commodity ?? (cropHint || tr('Crop sample'))}</span>
                         </div>
                         <img src={preview} alt="analyzed" className="h-full min-h-[280px] w-full object-cover" />
                         <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-2 px-4 py-4">
-                          <div className="rounded-2xl border border-white/10 bg-black/45 px-3 py-2 backdrop-blur-sm">
-                            <p className="text-[10px] uppercase tracking-[0.16em] text-white/45">{tr('Decision')}</p>
+                          <div className="rounded-2xl border border-border-soft bg-bg-elevated/85 px-3 py-2 backdrop-blur-sm">
+                            <p className="text-[10px] uppercase tracking-[0.16em] text-text-muted">{tr('Decision')}</p>
                             <p className={cn('mt-1 text-sm font-semibold', rec.text)}>{result.recommendation}</p>
                           </div>
-                          <div className="rounded-2xl border border-white/10 bg-black/45 px-3 py-2 backdrop-blur-sm">
-                            <p className="text-[10px] uppercase tracking-[0.16em] text-white/45">{tr('Market trend')}</p>
-                            <p className="mt-1 text-sm font-semibold text-white">{marketTrend}</p>
+                          <div className="rounded-2xl border border-border-soft bg-bg-elevated/85 px-3 py-2 backdrop-blur-sm">
+                            <p className="text-[10px] uppercase tracking-[0.16em] text-text-muted">{tr('Market trend')}</p>
+                            <p className="mt-1 text-sm font-semibold text-text-primary">{marketTrend}</p>
                           </div>
                         </div>
                       </div>
@@ -926,21 +961,21 @@ function SmartDecision() {
                       />
                     </div>
                     <div className="space-y-4">
-                      <div className="rounded-2xl border border-white/10 bg-black/15 p-4">
+                      <div className="rounded-2xl border border-border-soft bg-bg-cardHover/30 p-4">
                         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-text-muted">{tr('Final weighted reasoning')}</p>
                         <p className="mt-3 text-sm leading-7 text-text-secondary">{result.decision_reason}</p>
                       </div>
                       {!fruitFailed && (
                         <div className="grid gap-3 md:grid-cols-3">
-                          <div className="rounded-2xl border border-white/10 bg-black/15 p-4">
+                          <div className="rounded-2xl border border-border-soft bg-bg-cardHover/30 p-4">
                             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-text-muted">{tr('Price impact')}</p>
                             <p className="mt-2 text-sm leading-6 text-text-secondary">{summarizeText(result.price_reason)}</p>
                           </div>
-                          <div className="rounded-2xl border border-white/10 bg-black/15 p-4">
+                          <div className="rounded-2xl border border-border-soft bg-bg-cardHover/30 p-4">
                             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-text-muted">{tr('Market impact')}</p>
                             <p className="mt-2 text-sm leading-6 text-text-secondary">{summarizeText(result.market_insight)}</p>
                           </div>
-                          <div className="rounded-2xl border border-white/10 bg-black/15 p-4">
+                          <div className="rounded-2xl border border-border-soft bg-bg-cardHover/30 p-4">
                             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-text-muted">{tr('Storage / hold guidance')}</p>
                             <p className="mt-2 text-sm leading-6 text-text-secondary">{result.hold_instructions}</p>
                           </div>

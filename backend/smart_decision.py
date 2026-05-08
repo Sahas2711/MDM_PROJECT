@@ -2,6 +2,7 @@ import time
 
 from config import settings
 from generative import generate_analysis
+import enhance as enhancer
 from logger import get_logger
 from market_data import fetch_market_prices
 import predict as price_predictor
@@ -252,6 +253,7 @@ def _build_node_graph(
                 "decoder": preprocessing.get("decoder", "cv2"),
                 "yolo_label": image_result.get("fruit_detector_label"),
                 "yolo_conf": image_result.get("fruit_detector_confidence", 0.0),
+                "enhancement": preprocessing.get("enhancement", {"enhanced": False, "reason": "disabled"}),
             },
             "error": "",
             "why": (
@@ -595,10 +597,15 @@ async def decide(
     image_bytes: bytes,
     crop_hint: str = "",
     model_type: str = "best",
+    enable_enhancement: bool = False,
 ) -> dict:
     t0 = time.perf_counter()
 
-    image_result = image_predictor.analyze_image(image_bytes)
+    enhancement_meta: dict = {"enhanced": False, "reason": "disabled"}
+    if enable_enhancement:
+        image_bytes, enhancement_meta = enhancer.enhance(image_bytes)
+
+    image_result = image_predictor.analyze_image(image_bytes, enhancement_meta=enhancement_meta)
     if not image_result["fruit_detected"]:
         latency_ms = round((time.perf_counter() - t0) * 1000, 2)
         return {

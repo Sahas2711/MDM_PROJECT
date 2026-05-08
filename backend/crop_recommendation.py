@@ -97,10 +97,45 @@ def recommend(season: str, budget: int, soil_type: str) -> dict:
     # Sort by modal price descending (highest return first)
     results.sort(key=lambda x: x["expected_modal_price"], reverse=True)
 
+    top = results[0] if results else None
+    alternatives = [r["crop"] for r in results[1:4]] if len(results) > 1 else []
+
+    profitability = "High" if top and top["expected_modal_price"] > 2500 else "Medium" if top and top["expected_modal_price"] > 1500 else "Low"
+    confidence = min(95, 70 + len([r for r in results if r["data_points"] > 10]) * 5)
+
+    season_reasons = {
+        "kharif": f"Kharif season (Jun–Oct) aligns with monsoon rainfall, which {top['crop'] if top else 'this crop'} requires for optimal germination and growth.",
+        "rabi":   f"Rabi season (Oct–Mar) provides cool temperatures ideal for {top['crop'] if top else 'this crop'} development and yield.",
+        "zaid":   f"Zaid season (Mar–Jun) short summer window suits {top['crop'] if top else 'this crop'} with fast maturity cycles.",
+    }
+    soil_reasons = {
+        "loamy":    "Loamy soil provides balanced drainage and water retention, supporting strong root development.",
+        "black":    "Black soil's high moisture retention and mineral content directly benefits this crop's nutrient needs.",
+        "alluvial": "Alluvial soil's high fertility and fine texture supports high-yield cultivation.",
+        "sandy":    "Sandy soil's fast drainage suits this crop's preference for well-aerated root zones.",
+        "red":      "Red soil with proper fertilization supports this crop's moderate nutrient requirements.",
+        "clay":     "Clay soil's water retention is managed with proper drainage to support this crop.",
+    }
+
     return {
         "season": season_key,
         "soil_type": soil_key,
         "budget": budget,
-        "recommendations": results[:5],
+        "recommended_crop": top["crop"] if top else "N/A",
+        "expected_price_range": f"INR {top['expected_min_price']:,.0f} – {top['expected_max_price']:,.0f} / quintal" if top else "N/A",
+        "profitability": profitability,
+        "confidence": confidence,
+        "reason": (
+            f"{top['crop']} is the top recommendation for {season_key} season on {soil_key} soil within a budget of INR {budget:,}. "
+            f"Historical modal price is INR {top['expected_modal_price']:,.0f}/quintal with {top['data_points']} dataset records. "
+            f"Risk level is {top['risk_level']} based on price spread ratio. "
+            f"{season_reasons.get(season_key, '')} "
+            f"{soil_reasons.get(soil_key, '')}"
+        ) if top else "No suitable crop found for the given inputs.",
+        "season_reason": season_reasons.get(season_key, ""),
+        "soil_reason": soil_reasons.get(soil_key, ""),
+        "budget_reason": f"Budget of INR {budget:,} covers input costs for {top['crop']} cultivation. Expected return at modal price: INR {top['expected_modal_price']:,.0f}/quintal." if top else "",
+        "alternatives": alternatives,
+        "all_recommendations": results[:5],
         "note": "Based on historical dataset medians. Actual prices vary by market and timing.",
     }

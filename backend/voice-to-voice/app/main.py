@@ -32,34 +32,27 @@ app = FastAPI(
     description="Voice-to-voice farmer assistant with Marathi-first responses.",
 )
 
+# CORS must be added last so it wraps everything (add_middleware stacks in reverse)
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    request_id = str(uuid.uuid4())[:8]
+    t0 = time.perf_counter()
+    log.info("Request started", extra={"request_id": request_id, "method": request.method, "path": request.url.path})
+    response = await call_next(request)
+    elapsed = round((time.perf_counter() - t0) * 1000, 2)
+    response.headers["X-Request-ID"] = request_id
+    response.headers["X-Response-Time-Ms"] = str(elapsed)
+    log.info("Request finished", extra={"request_id": request_id, "status_code": response.status_code, "duration_ms": elapsed})
+    return response
+
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
-
-
-@app.middleware("http")
-async def log_requests(request: Request, call_next):
-    request_id = str(uuid.uuid4())[:8]
-    t0 = time.perf_counter()
-
-    log.info(
-        "Request started",
-        extra={"request_id": request_id, "method": request.method, "path": request.url.path},
-    )
-
-    response = await call_next(request)
-    elapsed = round((time.perf_counter() - t0) * 1000, 2)
-    response.headers["X-Request-ID"] = request_id
-    response.headers["X-Response-Time-Ms"] = str(elapsed)
-
-    log.info(
-        "Request finished",
-        extra={"request_id": request_id, "status_code": response.status_code, "duration_ms": elapsed},
-    )
-    return response
 
 
 @app.exception_handler(VoiceAssistantError)

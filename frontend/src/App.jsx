@@ -7,7 +7,8 @@ import MarketIntelligence from './pages/MarketIntelligence'
 import ModelPerformance from './pages/ModelPerformance'
 import SmartDecision from './pages/SmartDecision'
 import VoiceAssistant from './pages/VoiceAssistant'
-import './App.css'
+import ChatAssistant from './pages/ChatAssistant'
+import SyllabusMatch from './pages/SyllabusMatch'
 
 function App() {
   return (
@@ -20,8 +21,10 @@ function App() {
           <Route path="market-intelligence" element={<MarketIntelligence />} />
           <Route path="model-performance" element={<ModelPerformance />} />
           <Route path="smart-decision" element={<SmartDecision />} />
+          <Route path="chat-assistant" element={<ChatAssistant />} />
           <Route path="voice-assistant" element={<VoiceAssistant />} />
-          <Route path="ai-assistant" element={<Navigate to="/voice-assistant" replace />} />
+          <Route path="syllabus-match" element={<SyllabusMatch />} />
+          <Route path="ai-assistant" element={<Navigate to="/chat-assistant" replace />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

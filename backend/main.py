@@ -15,6 +15,7 @@ from logger import get_logger
 from database import init_db, save_prediction, get_history, get_analytics, create_user, get_user
 from auth import hash_password, verify_password, create_token, decode_token
 from crop_recommendation import recommend as crop_recommend
+import enhance as enhancer
 from schemas import (
     ClustersResponse, HealthResponse, ImagePredictResponse, ModelMetricsResponse,
     ModelType, PredictRequest, PredictResponse, SmartDecisionResponse,
@@ -130,7 +131,10 @@ MAX_IMAGE_BYTES = 10 * 1024 * 1024  # 10 MB
 
 
 @app.post("/predict-image", response_model=ImagePredictResponse)
-async def predict_image(file: UploadFile = File(..., description="Food image (JPEG/PNG/WEBP/BMP)")):
+async def predict_image(
+    file: UploadFile = File(..., description="Food image (JPEG/PNG/WEBP/BMP)"),
+    enable_enhancement: bool = Query(default=False, description="Run Real-ESRGAN before CNN inference"),
+):
     if file.content_type not in ALLOWED_CONTENT_TYPES:
         raise HTTPException(
             status_code=415,
@@ -144,8 +148,12 @@ async def predict_image(file: UploadFile = File(..., description="Food image (JP
     if len(image_bytes) > MAX_IMAGE_BYTES:
         raise HTTPException(status_code=413, detail="Image exceeds 10 MB limit.")
 
+    enhancement_meta: dict = {"enhanced": False, "reason": "disabled"}
+    if enable_enhancement:
+        image_bytes, enhancement_meta = enhancer.enhance(image_bytes)
+
     try:
-        result = image_predictor.predict_image(image_bytes)
+        result = image_predictor.predict_image(image_bytes, enhancement_meta=enhancement_meta)
         return result
     except RuntimeError as exc:
         log.error("CNN model unavailable", extra={"detail": str(exc)})
@@ -182,6 +190,10 @@ async def smart_decision(
         default="best",
         description="ML model to use: random_forest | ann | dnn | best",
     ),
+    enable_enhancement: bool = Query(
+        default=False,
+        description="Run Real-ESRGAN upscaling before the image pipeline",
+    ),
 ):
     if file.content_type not in ALLOWED_CONTENT_TYPES:
         raise HTTPException(
@@ -201,6 +213,7 @@ async def smart_decision(
             image_bytes=image_bytes,
             crop_hint=crop_hint,
             model_type=model_type,
+            enable_enhancement=enable_enhancement,
         )
         return result
     except ValueError as exc:

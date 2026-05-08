@@ -5,7 +5,7 @@ function Card({ className, ...props }) {
   return (
     <div
       className={cn(
-        'rounded-2xl border border-border-soft bg-gradient-to-b from-bg-card to-slate-950/70 shadow-card-md transition-all duration-300 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-card-lg',
+        'rounded-2xl border border-border-soft bg-gradient-to-b from-bg-card to-bg-cardHover shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-border-strong hover:shadow-card-lg',
         className,
       )}
       {...props}

@@ -7,7 +7,7 @@ from app.errors import VoiceAssistantError
 
 
 def validate_audio_input(content_type: str | None, audio_bytes: bytes) -> None:
-    normalized_content_type = content_type or "audio/wav"
+    normalized_content_type = (content_type or "audio/wav").split(";")[0].strip()
     if normalized_content_type not in settings.allowed_audio_content_types:
         raise VoiceAssistantError(
             message=f"Unsupported audio format '{normalized_content_type}'.",

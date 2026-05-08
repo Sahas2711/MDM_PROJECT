@@ -58,16 +58,33 @@ class HttpTTSProvider(BaseTTSProvider):
         self.model_name = "custom-http-tts"
 
     async def synthesize(self, text: str) -> tuple[bytes, str]:
+        base_url = settings.fallback_tts_url.rstrip("/")
         headers = {"Content-Type": "application/json"}
-        if settings.fallback_tts_api_key:
-            headers["Authorization"] = f"Bearer {settings.fallback_tts_api_key}"
-        payload = {"text": text, "language": "mr"}
-        if settings.fallback_tts_voice:
-            payload["voice"] = settings.fallback_tts_voice
+        payload: dict[str, object]
+        request_url = base_url
+
+        # Support ElevenLabs-style HTTP TTS when the configured URL points at its API root.
+        if "api.elevenlabs.io" in base_url:
+            if not settings.fallback_tts_api_key:
+                raise ProviderConfigError("FALLBACK_TTS_API_KEY is missing for ElevenLabs fallback TTS.")
+            if not settings.fallback_tts_voice:
+                raise ProviderConfigError("FALLBACK_TTS_VOICE is missing for ElevenLabs fallback TTS.")
+            headers["xi-api-key"] = settings.fallback_tts_api_key
+            request_url = f"{base_url}/{settings.fallback_tts_voice}"
+            payload = {
+                "text": text,
+                "model_id": "eleven_multilingual_v2",
+            }
+        else:
+            if settings.fallback_tts_api_key:
+                headers["Authorization"] = f"Bearer {settings.fallback_tts_api_key}"
+            payload = {"text": text, "language": "mr"}
+            if settings.fallback_tts_voice:
+                payload["voice"] = settings.fallback_tts_voice
 
         try:
             async with httpx.AsyncClient(timeout=settings.request_timeout_seconds) as client:
-                response = await client.post(settings.fallback_tts_url, headers=headers, json=payload)
+                response = await client.post(request_url, headers=headers, json=payload)
             response.raise_for_status()
             audio_bytes = response.content
             if not audio_bytes:

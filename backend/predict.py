@@ -318,10 +318,21 @@ def get_model_metrics() -> list[dict[str, Any]]:
         rows.append(
             {
                 "model": model_key,
+                "accuracy": payload.get("classification_report", {}).get("accuracy"),
                 "macro_f1": payload.get("macro_f1"),
                 "weighted_f1": payload.get("weighted_f1"),
                 "cv_accuracy_mean": payload.get("cv_accuracy_mean"),
                 "cv_accuracy_std": payload.get("cv_accuracy_std"),
+                "cv_f1_macro_mean": payload.get("cv_f1_macro_mean"),
+                "cv_precision_macro_mean": payload.get("cv_precision_macro_mean"),
+                "cv_recall_macro_mean": payload.get("cv_recall_macro_mean"),
+                "confusion_matrix": payload.get("confusion_matrix"),
+                "classification_report": payload.get("classification_report"),
+                "learning_curve": payload.get("learning_curve"),
+                "validation_curve": payload.get("validation_curve"),
+                "history": payload.get("history"),
+                "best_epoch": payload.get("best_epoch"),
+                "model_type": payload.get("model_type"),
             }
         )
     return rows

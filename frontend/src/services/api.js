@@ -27,12 +27,13 @@ export async function fetchPrediction(min_price, max_price) {
  * @param {File} imageFile
  * @param {string} cropHint  optional crop name (e.g. "apple", "wheat")
  */
-export async function fetchSmartDecision(imageFile, cropHint = '') {
+export async function fetchSmartDecision(imageFile, cropHint = '', enableEnhancement = false) {
   const form = new FormData()
   form.append('file', imageFile)
 
   const url = new URL(`${BASE_URL}/smart-decision`)
   if (cropHint) url.searchParams.set('crop_hint', cropHint)
+  url.searchParams.set('enable_enhancement', String(enableEnhancement))
 
   const response = await fetch(url.toString(), { method: 'POST', body: form })
 
@@ -119,6 +120,17 @@ export async function fetchVoiceHealth() {
   return response.json()
 }
 
+export async function fetchBackendHealth() {
+  const response = await fetch(`${BASE_URL}/health`)
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}))
+    throw new Error(error.detail || `Backend health failed with status ${response.status}`)
+  }
+
+  return response.json()
+}
+
 export async function fetchVoiceChat(audioFile) {
   const form = new FormData()
   form.append('file', audioFile)
@@ -146,6 +158,17 @@ export async function fetchVoiceReply(text) {
   if (!response.ok) {
     const error = await response.json().catch(() => ({}))
     throw new Error(error.detail || `Voice reply failed with status ${response.status}`)
+  }
+
+  return response.json()
+}
+
+export async function fetchPredictionHistory(limit = 20) {
+  const response = await fetch(`${BASE_URL}/history?limit=${limit}`)
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}))
+    throw new Error(error.detail || `History failed with status ${response.status}`)
   }
 
   return response.json()
